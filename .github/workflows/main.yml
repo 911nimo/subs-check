@@ -1,0 +1,30 @@
+name: Update and Filter Subscriptions
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # Runs every 6 hours
+  workflow_dispatch:        # Lets you run it manually
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+
+      - name: Run subs-check
+        run: |
+          go run ./cmd/subs-check -c config/config.yaml
+
+      - name: Commit and push filtered output
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add output/
+          git commit -m "Auto-update filtered subscriptions [skip ci]" || echo "No changes"
+          git push
