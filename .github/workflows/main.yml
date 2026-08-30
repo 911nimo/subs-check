@@ -1,9 +1,13 @@
 name: Update and Filter Subscriptions
 
+# ✅ This is the fix – grant write permission to the token
+permissions:
+  contents: write
+
 on:
   schedule:
-    - cron: "0 */6 * * *"   # Runs every 6 hours
-  workflow_dispatch:        # Lets you run it manually
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
 
 jobs:
   filter:
@@ -22,17 +26,17 @@ jobs:
 
       - name: Run subs-check (with failure safeguard)
         id: subscheck
-        continue-on-error: true   # ⬅️ Prevents workflow from failing if a URL is down
+        continue-on-error: true
         run: |
           go run ./cmd/subs-check -c config/config.yaml
 
       - name: Check if output was generated
         run: |
           if [ ! -f "output/subscription.yaml" ]; then
-            echo "⚠️ subs-check failed to generate output. Creating placeholder to prevent Clash errors."
+            echo "⚠️ subs-check failed. Creating placeholder."
             echo "proxies: []" > output/subscription.yaml
           else
-            echo "✅ Output generated successfully."
+            echo "✅ Output generated."
           fi
 
       - name: Commit and push filtered output
