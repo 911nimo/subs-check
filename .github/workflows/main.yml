@@ -2,8 +2,8 @@ name: Update and Filter Subscriptions
 
 on:
   schedule:
-    - cron: "0 */6 * * *"   # Runs every 6 hours
-  workflow_dispatch:        # Lets you run it manually
+    - cron: "0 */24 * * *"
+  workflow_dispatch:
 
 jobs:
   filter:
