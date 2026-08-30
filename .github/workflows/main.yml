@@ -1,6 +1,5 @@
 name: Update and Filter Subscriptions
 
-# ✅ This is the fix – grant write permission to the token
 permissions:
   contents: write
 
@@ -28,13 +27,24 @@ jobs:
         id: subscheck
         continue-on-error: true
         run: |
-          go run ./cmd/subs-check -c config/config.yaml
+          go run main.go -c config/config.yaml   # ✅ FIXED
 
       - name: Check if output was generated
         run: |
           if [ ! -f "output/subscription.yaml" ]; then
             echo "⚠️ subs-check failed. Creating placeholder."
             echo "proxies: []" > output/subscription.yaml
+          else
+            echo "✅ Output generated."
+          fi
+
+      - name: Commit and push filtered output
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add output/
+          git commit -m "Auto-update filtered subscriptions [skip ci]" || echo "No changes to commit"
+          git push           echo "proxies: []" > output/subscription.yaml
           else
             echo "✅ Output generated."
           fi
