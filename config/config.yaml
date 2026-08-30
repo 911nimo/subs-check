@@ -6,24 +6,30 @@ subscriptions:
   - "https://raw.githubusercontent.com/lagzian/SS-Collector/main/mix_clash.yaml"
   - "https://raw.githubusercontent.com/sevcator/5ubscrpt10n/main/protocols/ss.txt"
 
-# Output settings
+
 output: ./output/subscription.yaml
-output_format: clash          # Use 'mihomo' if you prefer
+output_format: clash
 
-# --- CONNECTIVITY & LIVENESS ---
-check_connect: true           # Replaces enable-check (TCP handshake test)
-check_timeout: 5              # Timeout in seconds
-remove_dead: true             # Physically remove dead/unreachable nodes
-keep_success: true            # Keep nodes that passed tests (avoids losing them on upstream changes)
+check_connect: true
+check_timeout: 5
+remove_dead: true
+keep_success: true
+deduplicate: true
+rename_node: true
 
-# --- DEDUPLICATION ---
-deduplicate: true             # Removes duplicate nodes (compares IP:Port)
+ip_risk: true
+ip_risk_threshold: 50
 
-# --- LOCATION CORRECTION ---
-rename_node: true             # Auto-renames nodes to correct country based on IP GeoIP
+media_check: true
+media_test:
+  - netflix
+  - youtube
+  - openai
 
-# --- 🚫 BAD IP / BLOCKLIST FILTERING (NEW Explicit Feature) ---
-ip_risk: true                 # Enables IP fraud score checking
+speed_test: true
+speed_url: "https://cp.cloudflare.com/generate_204"
+speed_test_timeout: 5
+speed_test_workers: 10                 # Enables IP fraud score checking
 ip_risk_threshold: 50         # Blocks IPs with fraud score >= 50 (0-100, lower is better)
 
 # --- MEDIA UNLOCK TESTING (Optional) ---
