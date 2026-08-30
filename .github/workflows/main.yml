@@ -2,8 +2,8 @@ name: Update and Filter Subscriptions
 
 on:
   schedule:
-    - cron: "0 */24 * * *"
-  workflow_dispatch:
+    - cron: "0 */6 * * *"   # Runs every 6 hours
+  workflow_dispatch:        # Lets you run it manually
 
 jobs:
   filter:
@@ -17,14 +17,28 @@ jobs:
         with:
           go-version: "1.21"
 
-      - name: Run subs-check
+      - name: Create output directory
+        run: mkdir -p ./output
+
+      - name: Run subs-check (with failure safeguard)
+        id: subscheck
+        continue-on-error: true   # ⬅️ Prevents workflow from failing if a URL is down
         run: |
           go run ./cmd/subs-check -c config/config.yaml
+
+      - name: Check if output was generated
+        run: |
+          if [ ! -f "output/subscription.yaml" ]; then
+            echo "⚠️ subs-check failed to generate output. Creating placeholder to prevent Clash errors."
+            echo "proxies: []" > output/subscription.yaml
+          else
+            echo "✅ Output generated successfully."
+          fi
 
       - name: Commit and push filtered output
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add output/
-          git commit -m "Auto-update filtered subscriptions [skip ci]" || echo "No changes"
+          git commit -m "Auto-update filtered subscriptions [skip ci]" || echo "No changes to commit"
           git push
