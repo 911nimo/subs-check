@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for git describe to get tags
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -27,24 +29,15 @@ jobs:
         id: subscheck
         continue-on-error: true
         run: |
-          go run main.go -c config/config.yaml   # ✅ FIXED
+          VERSION=$(git describe --tags --always 2>/dev/null || echo "dev")
+          COMMIT=$(git rev-parse --short HEAD)
+          go run -ldflags "-X main.Version=$VERSION -X main.CurrentCommit=$COMMIT" main.go -c config/config.yaml
 
       - name: Check if output was generated
         run: |
           if [ ! -f "output/subscription.yaml" ]; then
             echo "⚠️ subs-check failed. Creating placeholder."
             echo "proxies: []" > output/subscription.yaml
-          else
-            echo "✅ Output generated."
-          fi
-
-      - name: Commit and push filtered output
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add output/
-          git commit -m "Auto-update filtered subscriptions [skip ci]" || echo "No changes to commit"
-          git push           echo "proxies: []" > output/subscription.yaml
           else
             echo "✅ Output generated."
           fi
