@@ -1,26 +1,41 @@
 subscriptions:
   - "https://shadowmere.xyz/api/b64sub/"
-  - "https://raw.githubusercontent.com/rtwo2/FastNodes/main/sub/curated.txt"
+  - "https://raw.githubusercontent.com/ninjastrikers/Nexus-nodes/main/configs/shadowsocks.txt"
   - "https://raw.githubusercontent.com/ninjastrikers/Nexus-nodes/main/configs/all.txt"
   - "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.yml"
   - "https://raw.githubusercontent.com/lagzian/SS-Collector/main/mix_clash.yaml"
   - "https://raw.githubusercontent.com/sevcator/5ubscrpt10n/main/protocols/ss.txt"
 
-# Enable features you asked for
-enable-check: true              # Test if nodes are alive
-remove-dead: true               # Remove dead nodes
-keep-success-proxies: true      # Keep working nodes even if upstream changes[reference:4]
-deduplicate: true               # Remove duplicate nodes[reference:5]
-rename-node: true               # Rename by IP location[reference:6]
-media-check: true               # Enables IP fraud score filtering[reference:7]
+# Output settings
+output: ./output/subscription.yaml
+output_format: clash          # Use 'mihomo' if you prefer
 
-# IP risk filter (keeps only low-risk IPs)
-filter:
-  - "\\|[0-4]?[0-9]%"          # Keeps nodes with IP risk < 50%
+# --- CONNECTIVITY & LIVENESS ---
+check_connect: true           # Replaces enable-check (TCP handshake test)
+check_timeout: 5              # Timeout in seconds
+remove_dead: true             # Physically remove dead/unreachable nodes
+keep_success: true            # Keep nodes that passed tests (avoids losing them on upstream changes)
 
-# Output for Clash/Mihomo
-output-format: clash
+# --- DEDUPLICATION ---
+deduplicate: true             # Removes duplicate nodes (compares IP:Port)
 
-# Speed test
-speed-test: true
-speed-test-url: "https://cp.cloudflare.com/generate_204"
+# --- LOCATION CORRECTION ---
+rename_node: true             # Auto-renames nodes to correct country based on IP GeoIP
+
+# --- 🚫 BAD IP / BLOCKLIST FILTERING (NEW Explicit Feature) ---
+ip_risk: true                 # Enables IP fraud score checking
+ip_risk_threshold: 50         # Blocks IPs with fraud score >= 50 (0-100, lower is better)
+
+# --- MEDIA UNLOCK TESTING (Optional) ---
+media_check: true             # Tests if nodes work with streaming platforms
+media_test:
+  - netflix
+  - youtube
+  - disneyplus
+  - openai
+
+# --- SPEED TEST (Optional) ---
+speed_test: true
+speed_url: "https://cp.cloudflare.com/generate_204"
+speed_test_timeout: 5
+speed_test_workers: 10        # How many parallel speed tests to run
