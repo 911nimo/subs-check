@@ -31,17 +31,3 @@ speed_url: "https://cp.cloudflare.com/generate_204"
 speed_test_timeout: 5
 speed_test_workers: 10                 # Enables IP fraud score checking
 ip_risk_threshold: 50         # Blocks IPs with fraud score >= 50 (0-100, lower is better)
-
-# --- MEDIA UNLOCK TESTING (Optional) ---
-media_check: false            # Tests if nodes work with streaming platforms
-media_test:
-  - netflix
-  - youtube
-  - disneyplus
-  - openai
-
-# --- SPEED TEST (Optional) ---
-speed_test: false
-speed_url: "https://cp.cloudflare.com/generate_204"
-speed_test_timeout: 5
-speed_test_workers: 10        # How many parallel speed tests to run
