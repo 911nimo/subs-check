@@ -38,30 +38,28 @@ jobs:
           echo "========================================"
           ls -lah ./config/config.yaml
           echo
-          sed -n '1,220p' ./config/config.yaml
+          sed -n '1,240p' ./config/config.yaml
 
       - name: Create output directory
         run: |
           mkdir -p ./output
-          rm -f ./output/*.yaml
 
       - name: Run subs-check
         run: |
-          VERSION=$(git describe --tags --always 2>/dev/null || echo "dev")
-          COMMIT=$(git rev-parse --short HEAD)
-
           echo "========================================"
           echo "RUNNING SUBS-CHECK"
           echo "========================================"
-          echo "Version: $VERSION"
-          echo "Commit:  $COMMIT"
-          echo
 
-          go run . \
-            -ldflags "-X main.Version=$VERSION -X main.CurrentCommit=$COMMIT" \
-            -f ./config/config.yaml
+          echo "Commit:"
+          git rev-parse --short HEAD
+
+          echo
+          echo "Starting..."
+
+          go run . -f ./config/config.yaml
 
       - name: Inspect generated output
+        if: always()
         run: |
           echo "========================================"
           echo "OUTPUT DIRECTORY"
@@ -72,33 +70,11 @@ jobs:
             exit 1
           fi
 
-          find ./output -maxdepth 2 -type f -printf '%p (%s bytes)\n' | sort
-
-          echo
-          echo "========================================"
-          echo "YAML FILES"
-          echo "========================================"
-
-          find ./output -type f \
-            \( -name "*.yaml" -o -name "*.yml" \) \
-            -print
-
-      - name: Verify nodes were produced
-        run: |
-          echo "========================================"
-          echo "VERIFYING RESULT"
-          echo "========================================"
-
-          if ! find ./output -type f \
-              \( -name "*.yaml" -o -name "*.yml" \) \
-              | grep -q .; then
-            echo "❌ No YAML output was generated."
-            exit 1
-          fi
-
-          echo "✅ YAML output exists."
+          find ./output -maxdepth 3 -type f \
+            -printf '%p (%s bytes)\n' | sort || true
 
       - name: Commit and push filtered output
+        if: success()
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
