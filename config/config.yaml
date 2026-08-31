@@ -6,7 +6,6 @@ subscriptions:
   - "https://raw.githubusercontent.com/lagzian/SS-Collector/main/mix_clash.yaml"
   - "https://raw.githubusercontent.com/sevcator/5ubscrpt10n/main/protocols/ss.txt"
 
-
 output: ./output/subscription.yaml
 output_format: clash
 
@@ -25,9 +24,3 @@ media_test:
   - netflix
   - youtube
   - openai
-
-speed_test: true
-speed_url: "https://cp.cloudflare.com/generate_204"
-speed_test_timeout: 5
-speed_test_workers: 10                 # Enables IP fraud score checking
-ip_risk_threshold: 50         # Blocks IPs with fraud score >= 50 (0-100, lower is better)
