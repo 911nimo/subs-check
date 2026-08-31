@@ -11,11 +11,12 @@ on:
 jobs:
   filter:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # needed for git describe to get tags
+          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -25,27 +26,48 @@ jobs:
       - name: Create output directory
         run: mkdir -p ./output
 
-      - name: Run subs-check (with failure safeguard)
-        id: subscheck
-        continue-on-error: true
+      - name: Run subs-check
         run: |
           VERSION=$(git describe --tags --always 2>/dev/null || echo "dev")
           COMMIT=$(git rev-parse --short HEAD)
-          go run -ldflags "-X main.Version=$VERSION -X main.CurrentCommit=$COMMIT" main.go -f config/config.yaml
 
-      - name: Check if output was generated
+          echo "Version: $VERSION"
+          echo "Commit:  $COMMIT"
+
+          go run \
+            -ldflags "-X main.Version=$VERSION -X main.CurrentCommit=$COMMIT" \
+            main.go \
+            -f config/config.yaml
+
+      - name: Verify output
         run: |
           if [ ! -f "output/subscription.yaml" ]; then
-            echo "⚠️ subs-check failed. Creating placeholder."
-            echo "proxies: []" > output/subscription.yaml
-          else
-            echo "✅ Output generated."
+            echo "❌ output/subscription.yaml was not generated."
+            exit 1
           fi
+
+          if [ ! -s "output/subscription.yaml" ]; then
+            echo "❌ output/subscription.yaml is empty."
+            exit 1
+          fi
+
+          echo "✅ Output generated successfully:"
+          ls -lh output/subscription.yaml
+
+          echo
+          echo "Output preview:"
+          head -30 output/subscription.yaml
 
       - name: Commit and push filtered output
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add output/
-          git commit -m "Auto-update filtered subscriptions [skip ci]" || echo "No changes to commit"
-          git push
+
+          git add output/subscription.yaml
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-update filtered subscriptions [skip ci]"
+            git push
+          fi
