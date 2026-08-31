@@ -31,7 +31,7 @@ jobs:
         run: |
           VERSION=$(git describe --tags --always 2>/dev/null || echo "dev")
           COMMIT=$(git rev-parse --short HEAD)
-          go run -ldflags "-X main.Version=$VERSION -X main.CurrentCommit=$COMMIT" main.go -c config/config.yaml
+          go run -ldflags "-X main.Version=$VERSION -X main.CurrentCommit=$COMMIT" main.go -f config/config.yaml
 
       - name: Check if output was generated
         run: |
