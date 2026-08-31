@@ -23,50 +23,90 @@ jobs:
         with:
           go-version: "1.21"
 
+      - name: Show repository and configuration
+        run: |
+          echo "========================================"
+          echo "REPOSITORY"
+          echo "========================================"
+          pwd
+          git rev-parse --show-toplevel
+          git rev-parse --short HEAD
+
+          echo
+          echo "========================================"
+          echo "CONFIG FILE"
+          echo "========================================"
+          ls -lah ./config/config.yaml
+          echo
+          sed -n '1,220p' ./config/config.yaml
+
       - name: Create output directory
-        run: mkdir -p ./output
+        run: |
+          mkdir -p ./output
+          rm -f ./output/*.yaml
 
       - name: Run subs-check
         run: |
           VERSION=$(git describe --tags --always 2>/dev/null || echo "dev")
           COMMIT=$(git rev-parse --short HEAD)
 
+          echo "========================================"
+          echo "RUNNING SUBS-CHECK"
+          echo "========================================"
           echo "Version: $VERSION"
           echo "Commit:  $COMMIT"
+          echo
 
-          go run \
+          go run . \
             -ldflags "-X main.Version=$VERSION -X main.CurrentCommit=$COMMIT" \
-            main.go \
-            -f config/config.yaml
+            -f ./config/config.yaml
 
-      - name: Verify output
+      - name: Inspect generated output
         run: |
-          if [ ! -f "output/subscription.yaml" ]; then
-            echo "❌ output/subscription.yaml was not generated."
+          echo "========================================"
+          echo "OUTPUT DIRECTORY"
+          echo "========================================"
+
+          if [ ! -d "./output" ]; then
+            echo "❌ output directory does not exist"
             exit 1
           fi
 
-          if [ ! -s "output/subscription.yaml" ]; then
-            echo "❌ output/subscription.yaml is empty."
-            exit 1
-          fi
-
-          echo "✅ Output generated successfully:"
-          ls -lh output/subscription.yaml
+          find ./output -maxdepth 2 -type f -printf '%p (%s bytes)\n' | sort
 
           echo
-          echo "Output preview:"
-          head -30 output/subscription.yaml
+          echo "========================================"
+          echo "YAML FILES"
+          echo "========================================"
+
+          find ./output -type f \
+            \( -name "*.yaml" -o -name "*.yml" \) \
+            -print
+
+      - name: Verify nodes were produced
+        run: |
+          echo "========================================"
+          echo "VERIFYING RESULT"
+          echo "========================================"
+
+          if ! find ./output -type f \
+              \( -name "*.yaml" -o -name "*.yml" \) \
+              | grep -q .; then
+            echo "❌ No YAML output was generated."
+            exit 1
+          fi
+
+          echo "✅ YAML output exists."
 
       - name: Commit and push filtered output
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          git add output/subscription.yaml
+          git add output/
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "No output changes to commit."
           else
             git commit -m "Auto-update filtered subscriptions [skip ci]"
             git push
