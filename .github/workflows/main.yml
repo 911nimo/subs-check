@@ -292,32 +292,51 @@ jobs:
       # ============================================================
       # 10. Commit output to repository
       # ============================================================
-      - name: Commit and push output
+            - name: Commit and push output
+        shell: bash
         run: |
-          set -eu
+          set -e
 
           echo "========================================"
           echo "COMMITTING OUTPUT"
           echo "========================================"
 
+          # Verify generated files
+          if [ ! -f "output/subscription.yaml" ]; then
+            echo "❌ output/subscription.yaml is missing"
+            exit 1
+          fi
+
+          if [ ! -f "output/all.yaml" ]; then
+            echo "❌ output/all.yaml is missing"
+            exit 1
+          fi
+
+          echo "Generated files:"
+          ls -lh output/subscription.yaml output/all.yaml
+
+          # Configure Git
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          git add output/all.yaml output/subscription.yaml
+          # Force-add files because the upstream .gitignore ignores output YAML files
+          git add -f output/subscription.yaml
+          git add -f output/all.yaml
 
+          # Commit only if something actually changed
           if git diff --cached --quiet; then
-            echo "No output changes."
+            echo "ℹ️ No output changes to commit."
             exit 0
           fi
 
-          git commit \
-            -m "Auto-update filtered subscriptions [skip ci]"
+          git commit -m "Auto-update filtered subscriptions"
 
-          git push
+          # Push generated output
+          git push origin HEAD:${GITHUB_REF_NAME}
 
-          echo
-          echo "✅ Output successfully pushed to repository."
-
+          echo "========================================"
+          echo "OUTPUT COMMITTED SUCCESSFULLY"
+          echo "========================================"
       # ============================================================
       # 11. Final summary
       # ============================================================
