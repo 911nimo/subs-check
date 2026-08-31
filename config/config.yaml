@@ -1,26 +1,109 @@
-subscriptions:
+print-progress: true
+
+concurrent: 50
+media-concurrent: 20
+speed-concurrent: 20
+shuffle-test-order: true
+
+check-interval: 120
+
+success-limit: 0
+
+timeout: 5000
+alive-test-url: "http://gstatic.com/generate_204"
+
+speed-test-url: "https://github.com/AaronFeng753/Waifu2x-Extension-GUI/releases/download/v2.21.12/Waifu2x-Extension-GUI-v2.21.12-Portable.7z"
+min-speed: 512
+download-timeout: 10
+download-mb: 1
+total-speed-limit: 0
+
+listen-port: ":8199"
+
+rename-node: true
+node-prefix: ""
+
+node-type:
+
+filter:
+
+media-check: true
+media-check-timeout: 5
+
+platforms:
+  - iprisk
+  - youtube
+  - netflix
+  - openai
+
+keep-days: 0
+
+output-dir: "./output"
+
+enable-web-ui: false
+api-key: ""
+
+callback-script: ""
+
+apprise-api-server: ""
+recipient-url:
+notify-title: "Node Status Update"
+
+sub-store-port: ""
+sub-store-path: ""
+sub-store-sync-cron: ""
+sub-store-produce-cron: ""
+sub-store-push-service: ""
+
+mihomo-overwrite-url: "http://127.0.0.1:8199/sub/ACL4SSR_Online_Full.yaml"
+
+save-method: local
+
+webdav-url: ""
+webdav-username: ""
+webdav-password: ""
+
+github-gist-id: ""
+github-token: ""
+github-api-mirror: ""
+
+worker-url: ""
+worker-token: ""
+
+s3-endpoint: ""
+s3-access-id: ""
+s3-secret-key: ""
+s3-bucket: ""
+s3-use-ssl: false
+s3-bucket-lookup: "auto"
+
+sub-urls-retry: 3
+sub-urls-concurrent: 20
+sub-urls-get-ua: "clash.meta (https://github.com/beck-8/subs-check)"
+
+github-proxy: ""
+proxy: ""
+
+success-rate: 0
+
+ipv6: true
+
+dns:
+  enable: false
+  proxy-server-nameserver:
+    - "https://dns.alidns.com/dns-query"
+  nameserver:
+    - "https://dns.alidns.com/dns-query"
+  default-nameserver:
+    - "223.5.5.5"
+    - "119.29.29.29"
+
+sub-urls-remote: []
+
+sub-urls:
   - "https://shadowmere.xyz/api/b64sub/"
   - "https://raw.githubusercontent.com/rtwo2/FastNodes/main/sub/curated.txt"
   - "https://raw.githubusercontent.com/ninjastrikers/Nexus-nodes/main/configs/all.txt"
   - "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.yml"
   - "https://raw.githubusercontent.com/lagzian/SS-Collector/main/mix_clash.yaml"
   - "https://raw.githubusercontent.com/sevcator/5ubscrpt10n/main/protocols/ss.txt"
-
-output: ./output/subscription.yaml
-output_format: clash
-
-check_connect: true
-check_timeout: 5
-remove_dead: true
-keep_success: true
-deduplicate: true
-rename_node: true
-
-ip_risk: true
-ip_risk_threshold: 50
-
-media_check: true
-media_test:
-  - netflix
-  - youtube
-  - openai
