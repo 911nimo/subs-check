@@ -4,11 +4,9 @@ permissions:
   contents: write
 
 on:
-  # Run once every day at 02:00 UTC.
   schedule:
-    - cron: "0 2 * * *"
-
-  # Allow manual execution from GitHub Actions.
+    # Run once every day at 00:00 UTC
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -20,14 +18,13 @@ jobs:
     name: Build filtered subscriptions
     runs-on: ubuntu-latest
 
-    # The observed test takes about 28 minutes.
-    # Give it enough headroom without allowing an endless run.
+    # The full ~66k-node test currently takes about 27 minutes.
     timeout-minutes: 60
 
     steps:
 
       # ============================================================
-      # 1. Checkout repository
+      # 1. Checkout
       # ============================================================
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -44,7 +41,7 @@ jobs:
           cache: true
 
       # ============================================================
-      # 3. Verify repository and configuration
+      # 3. Verify configuration
       # ============================================================
       - name: Verify configuration
         shell: bash
@@ -69,7 +66,7 @@ jobs:
 
           test -f ./config/config.yaml
 
-          echo "Config file:"
+          echo "Using:"
           ls -lh ./config/config.yaml
 
           echo
@@ -83,27 +80,10 @@ jobs:
             ./config/config.yaml || true
 
       # ============================================================
-      # 4. Prepare output directory
-      # ============================================================
-      - name: Prepare output directory
-        shell: bash
-        run: |
-          set -eu
-
-          mkdir -p ./output
-
-          rm -f ./output/all.yaml
-          rm -f ./output/subscription.yaml
-          rm -f ./subs-check.log
-
-          echo "Output directory prepared:"
-          ls -la ./output
-
-      # ============================================================
-      # 5. Build subs-check
+      # 4. Build subs-check
       #
-      # Build once, then execute the binary.
-      # This avoids relying on "go run" for the actual long test.
+      # Build locally instead of using custom ldflags.
+      # This avoids Version / CurrentCommit redeclaration problems.
       # ============================================================
       - name: Build subs-check
         shell: bash
@@ -116,25 +96,37 @@ jobs:
 
           go build -o ./subs-check .
 
-          chmod +x ./subs-check
+          test -x ./subs-check
 
-          echo
-          echo "Binary:"
           ls -lh ./subs-check
+
+      # ============================================================
+      # 5. Prepare output directory
+      # ============================================================
+      - name: Prepare output directory
+        shell: bash
+        run: |
+          set -eu
+
+          mkdir -p ./output
+
+          rm -f ./output/all.yaml
+          rm -f ./output/subscription.yaml
+          rm -f ./output/us.yaml
+          rm -f ./output/world.yaml
+
+          echo "========================================"
+          echo "OUTPUT DIRECTORY"
+          echo "========================================"
+
+          ls -la ./output
 
       # ============================================================
       # 6. Run ONE subs-check cycle
       #
-      # subs-check itself remains alive because it normally waits
-      # for its next check interval.
-      #
-      # We therefore:
-      #   1. Start it.
-      #   2. Wait for the FIRST completed detection.
-      #   3. Verify all.yaml exists and is non-empty.
-      #   4. Stop subs-check cleanly.
-      #
-      # The next scheduled GitHub Actions run performs the next cycle.
+      # subs-check normally remains running according to its
+      # check-interval. We therefore start it in the background,
+      # wait for the FIRST genuine all.yaml, then terminate it.
       # ============================================================
       - name: Run subs-check and capture first completed result
         shell: bash
@@ -145,9 +137,9 @@ jobs:
           echo "STARTING SUBS-CHECK"
           echo "========================================"
 
-          : > ./subs-check.log
+          : > subs-check.log
 
-          ./subs-check -f ./config/config.yaml > ./subs-check.log 2>&1 &
+          ./subs-check -f ./config/config.yaml > subs-check.log 2>&1 &
           PID=$!
 
           echo "subs-check PID: $PID"
@@ -159,25 +151,17 @@ jobs:
             echo "========================================"
 
             if kill -0 "$PID" 2>/dev/null; then
-              echo "Sending TERM to PID $PID..."
-
               kill "$PID" 2>/dev/null || true
 
-              # Give the program time to exit cleanly.
-              for i in 1 2 3 4 5 6 7 8 9 10; do
+              for i in 1 2 3 4 5; do
                 if ! kill -0 "$PID" 2>/dev/null; then
-                  echo "subs-check stopped cleanly."
                   break
                 fi
 
                 sleep 1
               done
 
-              # Force termination only if necessary.
               if kill -0 "$PID" 2>/dev/null; then
-                echo "subs-check did not exit after TERM."
-                echo "Sending KILL..."
-
                 kill -9 "$PID" 2>/dev/null || true
               fi
             fi
@@ -187,117 +171,78 @@ jobs:
 
           trap cleanup EXIT
 
-          # ----------------------------------------------------------
-          # Maximum time allowed for the actual detection cycle.
-          #
-          # Previous successful run:
-          # approximately 28 minutes.
-          #
-          # 55 minutes gives substantial headroom while remaining
-          # inside the 60-minute GitHub job timeout.
-          # ----------------------------------------------------------
-          MAX_WAIT=3300
+          MAX_WAIT=3600
           ELAPSED=0
 
           echo
-          echo "Waiting for FIRST completed detection cycle..."
-          echo "Maximum wait: ${MAX_WAIT}s (~55 minutes)"
+          echo "Waiting for first completed output..."
+          echo "Maximum wait: ${MAX_WAIT}s"
 
           while true; do
 
             # --------------------------------------------------------
-            # Detect the program's explicit completion message.
-            # --------------------------------------------------------
-            if grep -q "检测完成" ./subs-check.log 2>/dev/null; then
-
-              if [ -s "./output/all.yaml" ]; then
-
-                SIZE=$(wc -c < "./output/all.yaml")
-
-                echo
-                echo "========================================"
-                echo "FIRST COMPLETE OUTPUT DETECTED"
-                echo "========================================"
-
-                echo "File: output/all.yaml"
-                echo "Size: ${SIZE} bytes"
-
-                break
-              fi
-            fi
-
-            # --------------------------------------------------------
-            # Also accept a completed output if the log wording
-            # changes but the program has clearly stopped.
+            # Genuine output detected
             # --------------------------------------------------------
             if [ -s "./output/all.yaml" ]; then
 
               SIZE=$(wc -c < "./output/all.yaml")
 
-              # Require the file size to remain stable for two checks.
-              sleep 2
+              echo
+              echo "========================================"
+              echo "FIRST COMPLETE OUTPUT DETECTED"
+              echo "========================================"
 
-              SIZE2=$(wc -c < "./output/all.yaml")
+              echo "File: output/all.yaml"
+              echo "Size: ${SIZE} bytes"
 
-              if [ "$SIZE" -eq "$SIZE2" ] && [ "$SIZE" -gt 0 ]; then
-
-                echo
-                echo "========================================"
-                echo "STABLE OUTPUT DETECTED"
-                echo "========================================"
-
-                echo "File: output/all.yaml"
-                echo "Size: ${SIZE2} bytes"
-
-                break
-              fi
+              break
             fi
 
             # --------------------------------------------------------
-            # Detect unexpected process termination.
+            # Detect unexpected termination
             # --------------------------------------------------------
             if ! kill -0 "$PID" 2>/dev/null; then
 
               echo
-              echo "❌ subs-check exited before a valid result was detected."
+              echo "❌ subs-check exited before producing output."
 
               echo
               echo "========================================"
               echo "SUBS-CHECK LOG"
               echo "========================================"
 
-              cat ./subs-check.log || true
+              cat subs-check.log || true
 
               exit 1
             fi
 
             # --------------------------------------------------------
-            # Timeout.
+            # Timeout
             # --------------------------------------------------------
             if [ "$ELAPSED" -ge "$MAX_WAIT" ]; then
 
               echo
-              echo "❌ Timed out waiting for completed output."
+              echo "❌ Timed out waiting for output."
 
               echo
               echo "========================================"
-              echo "LAST 200 LOG LINES"
+              echo "LAST LOG OUTPUT"
               echo "========================================"
 
-              tail -200 ./subs-check.log || true
+              tail -200 subs-check.log || true
 
               exit 1
             fi
 
             # --------------------------------------------------------
-            # Progress display every 30 seconds.
+            # Progress every 30 seconds
             # --------------------------------------------------------
             if [ $((ELAPSED % 30)) -eq 0 ]; then
 
               echo
               echo "---- subs-check progress (${ELAPSED}s) ----"
 
-              tail -20 ./subs-check.log || true
+              tail -15 subs-check.log || true
 
               echo "-------------------------------------------"
             fi
@@ -308,14 +253,10 @@ jobs:
           done
 
           echo
-          echo "========================================"
-          echo "FIRST TEST CYCLE COMPLETED"
-          echo "========================================"
-
-          ls -lh ./output/all.yaml
+          echo "✅ First test cycle completed successfully."
 
       # ============================================================
-      # 7. Show final subs-check result
+      # 7. Show final subs-check log
       # ============================================================
       - name: Show final subs-check result
         if: always()
@@ -325,14 +266,10 @@ jobs:
           echo "SUBS-CHECK FINAL LOG"
           echo "========================================"
 
-          if [ -f ./subs-check.log ]; then
-            cat ./subs-check.log
-          else
-            echo "No subs-check.log found."
-          fi
+          cat subs-check.log || true
 
       # ============================================================
-      # 8. Create stable published filename
+      # 8. Create stable subscription.yaml
       # ============================================================
       - name: Create subscription.yaml
         shell: bash
@@ -344,53 +281,283 @@ jobs:
           cp ./output/all.yaml ./output/subscription.yaml
 
           echo "========================================"
-          echo "GENERATED OUTPUT"
+          echo "BASE OUTPUT"
           echo "========================================"
 
-          ls -lh ./output/all.yaml
-          ls -lh ./output/subscription.yaml
-
-          echo
-          echo "Output files:"
-          find ./output -maxdepth 2 -type f \
-            -printf '%p (%s bytes)\n' | sort
+          ls -lh \
+            ./output/all.yaml \
+            ./output/subscription.yaml
 
       # ============================================================
-      # 9. Validate generated subscription
+      # 9. Split output into US and WORLD
+      #
+      # IMPORTANT:
+      # - all.yaml is NEVER modified.
+      # - subscription.yaml is the complete list.
+      # - us.yaml contains US nodes.
+      # - world.yaml contains everything else.
+      #
+      # The split is performed against proxy "name" values.
       # ============================================================
-      - name: Validate generated subscription
+      - name: Split US and World subscriptions
         shell: bash
         run: |
           set -eu
 
+          echo "========================================"
+          echo "SPLITTING US / WORLD OUTPUT"
+          echo "========================================"
+
           test -s ./output/all.yaml
-          test -s ./output/subscription.yaml
+
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          src = Path("output/all.yaml")
+          us_file = Path("output/us.yaml")
+          world_file = Path("output/world.yaml")
+
+          text = src.read_text(encoding="utf-8")
+
+          lines = text.splitlines(keepends=True)
+
+          # ----------------------------------------------------------
+          # Identify the proxies section.
+          # ----------------------------------------------------------
+          proxies_start = None
+          proxies_end = len(lines)
+
+          for i, line in enumerate(lines):
+              if re.match(r"^proxies:\s*$", line):
+                  proxies_start = i
+                  break
+
+          if proxies_start is None:
+              raise SystemExit("ERROR: Could not find 'proxies:' section.")
+
+          # Find the end of the proxies list.
+          for i in range(proxies_start + 1, len(lines)):
+              line = lines[i]
+
+              # A new top-level YAML key ends the proxies section.
+              if line and not line.startswith((" ", "\t", "-", "#")):
+                  if re.match(r"^[A-Za-z0-9_-]+:\s*", line):
+                      proxies_end = i
+                      break
+
+          header = lines[:proxies_start + 1]
+          proxy_lines = lines[proxies_start + 1:proxies_end]
+          footer = lines[proxies_end:]
+
+          # ----------------------------------------------------------
+          # Parse individual proxy blocks.
+          #
+          # A proxy starts at:
+          #
+          # - name: ...
+          #
+          # and continues until the next "- name:".
+          # ----------------------------------------------------------
+          blocks = []
+          current = []
+
+          for line in proxy_lines:
+
+              if re.match(r"^\s*-\s+name\s*:", line):
+
+                  if current:
+                      blocks.append(current)
+
+                  current = [line]
+
+              elif current:
+                  current.append(line)
+
+          if current:
+              blocks.append(current)
+
+          # ----------------------------------------------------------
+          # US identification.
+          #
+          # We deliberately require recognizable location markers
+          # rather than simply matching every occurrence of "us".
+          # ----------------------------------------------------------
+          us_patterns = [
+              r"(^|[\s_\-\[\]\(\)/|])US($|[\s_\-\[\]\(\)/|])",
+              r"(^|[\s_\-\[\]\(\)/|])USA($|[\s_\-\[\]\(\)/|])",
+              r"UNITED[\s_-]*STATES",
+              r"美国",
+          ]
+
+          us_regex = re.compile(
+              "|".join(us_patterns),
+              re.IGNORECASE
+          )
+
+          us_blocks = []
+          world_blocks = []
+
+          for block in blocks:
+
+              name = ""
+
+              if block:
+                  match = re.match(
+                      r"^\s*-\s+name\s*:\s*(.*?)(?:\r?\n)?$",
+                      block[0]
+                  )
+
+                  if match:
+                      name = match.group(1).strip()
+
+              if us_regex.search(name):
+                  us_blocks.append(block)
+              else:
+                  world_blocks.append(block)
+
+          # ----------------------------------------------------------
+          # Preserve the original top-level configuration.
+          #
+          # We create valid standalone Clash/Mihomo YAML files with
+          # the same non-proxy configuration and only change the
+          # proxy list.
+          # ----------------------------------------------------------
+          def write_file(path, blocks):
+
+              output = []
+
+              output.extend(header)
+
+              for block in blocks:
+                  output.extend(block)
+
+              output.extend(footer)
+
+              path.write_text(
+                  "".join(output),
+                  encoding="utf-8"
+              )
+
+          write_file(us_file, us_blocks)
+          write_file(world_file, world_blocks)
+
+          print("========================================")
+          print("SPLIT COMPLETE")
+          print("========================================")
+          print(f"Total proxy entries: {len(blocks)}")
+          print(f"US proxy entries:    {len(us_blocks)}")
+          print(f"World proxy entries: {len(world_blocks)}")
+          print(
+              f"Count check:         "
+              f"{len(us_blocks)} + {len(world_blocks)} = "
+              f"{len(us_blocks) + len(world_blocks)}"
+          )
+
+          if len(us_blocks) + len(world_blocks) != len(blocks):
+              raise SystemExit(
+                  "ERROR: US + World count does not equal total count."
+              )
+          PY
+
+          echo
+          echo "Generated files:"
+
+          ls -lh \
+            ./output/all.yaml \
+            ./output/subscription.yaml \
+            ./output/us.yaml \
+            ./output/world.yaml
+
+      # ============================================================
+      # 10. Validate all generated YAML files
+      # ============================================================
+      - name: Validate generated subscriptions
+        shell: bash
+        run: |
+          set -eu
 
           echo "========================================"
           echo "OUTPUT VALIDATION"
           echo "========================================"
 
-          echo "all.yaml proxy entries:"
-          grep -cE '^[[:space:]]*-[[:space:]]*name:' \
-            ./output/all.yaml || true
+          for FILE in \
+            ./output/all.yaml \
+            ./output/subscription.yaml \
+            ./output/us.yaml \
+            ./output/world.yaml
+          do
+
+            if [ ! -s "$FILE" ]; then
+              echo "❌ Missing or empty: $FILE"
+              exit 1
+            fi
+
+            echo
+            echo "File: $FILE"
+            ls -lh "$FILE"
+
+            COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
+              "$FILE" || true)
+
+            echo "Proxy entries: $COUNT"
+
+          done
 
           echo
-          echo "subscription.yaml proxy entries:"
-          grep -cE '^[[:space:]]*-[[:space:]]*name:' \
-            ./output/subscription.yaml || true
+          echo "========================================"
+          echo "FILE SIZES"
+          echo "========================================"
 
-          echo
-          echo "File sizes:"
           wc -c \
             ./output/all.yaml \
-            ./output/subscription.yaml
+            ./output/subscription.yaml \
+            ./output/us.yaml \
+            ./output/world.yaml
 
       # ============================================================
-      # 10. Upload artifact BEFORE Git push
+      # 11. Verify US + World = All
       #
-      # IMPORTANT:
-      # Even if the Git commit/push fails, these files remain
-      # downloadable from the GitHub Actions run for 7 days.
+      # This prevents accidentally publishing an incomplete split.
+      # ============================================================
+      - name: Verify split counts
+        shell: bash
+        run: |
+          set -eu
+
+          ALL_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
+            ./output/all.yaml || true)
+
+          US_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
+            ./output/us.yaml || true)
+
+          WORLD_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
+            ./output/world.yaml || true)
+
+          echo "========================================"
+          echo "SPLIT COUNT CHECK"
+          echo "========================================"
+
+          echo "All:   $ALL_COUNT"
+          echo "US:    $US_COUNT"
+          echo "World: $WORLD_COUNT"
+          echo
+          echo "US + World: $((US_COUNT + WORLD_COUNT))"
+
+          if [ "$((US_COUNT + WORLD_COUNT))" -ne "$ALL_COUNT" ]; then
+            echo
+            echo "❌ SPLIT COUNT MISMATCH"
+            exit 1
+          fi
+
+          echo
+          echo "✅ Split count verified."
+
+      # ============================================================
+      # 12. Upload Actions artifact
+      #
+      # Even if Git push fails, these files remain downloadable
+      # from the Actions run.
       # ============================================================
       - name: Upload generated subscriptions
         if: always()
@@ -400,56 +567,63 @@ jobs:
           path: |
             output/all.yaml
             output/subscription.yaml
+            output/us.yaml
+            output/world.yaml
             subs-check.log
           if-no-files-found: warn
           retention-days: 7
 
       # ============================================================
-      # 11. Commit output to repository
-      #
-      # output/*.yaml is ignored upstream, therefore -f is required.
+      # 13. Commit and push output
       # ============================================================
       - name: Commit and push output
         shell: bash
         run: |
-          set -eu
+          set -e
 
           echo "========================================"
           echo "COMMITTING OUTPUT"
           echo "========================================"
 
           # ----------------------------------------------------------
-          # Verify generated files.
+          # Verify everything exists before touching Git.
           # ----------------------------------------------------------
-          test -s "output/subscription.yaml"
-          test -s "output/all.yaml"
+          for FILE in \
+            output/all.yaml \
+            output/subscription.yaml \
+            output/us.yaml \
+            output/world.yaml
+          do
+            if [ ! -s "$FILE" ]; then
+              echo "❌ Missing or empty: $FILE"
+              exit 1
+            fi
+          done
 
           echo "Generated files:"
           ls -lh \
+            output/all.yaml \
             output/subscription.yaml \
-            output/all.yaml
+            output/us.yaml \
+            output/world.yaml
 
           # ----------------------------------------------------------
-          # Configure Git identity.
+          # Configure Git
           # ----------------------------------------------------------
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
           # ----------------------------------------------------------
-          # Force-add because upstream .gitignore ignores output YAML.
+          # output/*.yaml may be ignored by the repository.
+          # Force-add them deliberately.
           # ----------------------------------------------------------
-          git add -f output/subscription.yaml
           git add -f output/all.yaml
+          git add -f output/subscription.yaml
+          git add -f output/us.yaml
+          git add -f output/world.yaml
 
           # ----------------------------------------------------------
-          # Show staged changes.
-          # ----------------------------------------------------------
-          echo
-          echo "Staged changes:"
-          git status --short
-
-          # ----------------------------------------------------------
-          # Nothing changed -> don't create an unnecessary commit.
+          # Commit only when something changed.
           # ----------------------------------------------------------
           if git diff --cached --quiet; then
             echo
@@ -457,49 +631,16 @@ jobs:
             exit 0
           fi
 
-          # ----------------------------------------------------------
-          # Commit.
-          # ----------------------------------------------------------
+          echo
+          echo "Changes to commit:"
+          git diff --cached --stat
+
           git commit -m "Auto-update filtered subscriptions"
 
           # ----------------------------------------------------------
-          # Push.
+          # Push to the branch that triggered the workflow.
           # ----------------------------------------------------------
           git push origin HEAD:${GITHUB_REF_NAME}
 
           echo
-          echo "========================================"
-          echo "OUTPUT COMMITTED SUCCESSFULLY"
-          echo "========================================"
-
-      # ============================================================
-      # 12. Final summary
-      # ============================================================
-      - name: Final summary
-        if: always()
-        shell: bash
-        run: |
-          echo "========================================"
-          echo "WORKFLOW COMPLETE"
-          echo "========================================"
-
-          if [ -s "./output/subscription.yaml" ]; then
-            echo "✅ output/subscription.yaml exists"
-            ls -lh ./output/subscription.yaml
-          else
-            echo "❌ output/subscription.yaml missing"
-          fi
-
-          if [ -s "./output/all.yaml" ]; then
-            echo "✅ output/all.yaml exists"
-            ls -lh ./output/all.yaml
-          else
-            echo "❌ output/all.yaml missing"
-          fi
-
-          echo
-          echo "========================================"
-          echo "FINAL GIT STATUS"
-          echo "========================================"
-
-          git status --short || true
+          echo "=============
