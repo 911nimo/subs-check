@@ -8,6 +8,9 @@ import (
 	"github.com/beck-8/subs-check/app"
 )
 
+var Version string
+var CurrentCommit string
+
 func main() {
 	application := app.New(fmt.Sprintf("%s-%s", Version, CurrentCommit))
 	slog.Info(fmt.Sprintf("当前版本: %s-%s", Version, CurrentCommit))
