@@ -34,6 +34,8 @@ platforms:
   - iprisk
   - youtube
   - openai
+  - claude
+  - gemini
 
 keep-days: 0
 
