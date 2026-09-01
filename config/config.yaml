@@ -33,7 +33,6 @@ media-check-timeout: 5
 platforms:
   - iprisk
   - youtube
-  - netflix
   - openai
 
 keep-days: 0
