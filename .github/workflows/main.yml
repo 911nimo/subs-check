@@ -5,7 +5,6 @@ permissions:
 
 on:
   schedule:
-    # Run once every day at 00:00 UTC
     - cron: "0 0 * * *"
   workflow_dispatch:
 
@@ -17,131 +16,79 @@ jobs:
   filter:
     name: Build filtered subscriptions
     runs-on: ubuntu-latest
-
-    # The full ~66k-node test currently takes about 27 minutes.
     timeout-minutes: 60
 
     steps:
 
-      # ============================================================
-      # 1. Checkout
-      # ============================================================
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # ============================================================
-      # 2. Set up Go
-      # ============================================================
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: "1.21"
           cache: true
 
-      # ============================================================
-      # 3. Verify configuration
-      # ============================================================
       - name: Verify configuration
         shell: bash
         run: |
           set -eu
-
           echo "========================================"
           echo "REPOSITORY"
           echo "========================================"
-
           echo "Commit:"
           git rev-parse --short HEAD
-
           echo
           echo "Branch:"
           git branch --show-current
-
           echo
           echo "========================================"
           echo "CONFIGURATION"
           echo "========================================"
-
           test -f ./config/config.yaml
-
           echo "Using:"
           ls -lh ./config/config.yaml
-
           echo
           echo "Subscription sources:"
-          grep -nE '^[[:space:]]*-[[:space:]]*["'\'']?https?://' \
-            ./config/config.yaml || true
-
+          grep -nE '^[[:space:]]*-[[:space:]]*["'\'']?https?://' ./config/config.yaml || true
           echo
           echo "Important settings:"
-          grep -nE '^(concurrent|media-concurrent|speed-concurrent|timeout|speed-test-url|min-speed|download-timeout|download-mb|total-speed-limit|media-check|output-dir|save-method|check-interval):' \
-            ./config/config.yaml || true
+          grep -nE '^(concurrent|media-concurrent|speed-concurrent|timeout|speed-test-url|min-speed|download-timeout|download-mb|total-speed-limit|media-check|output-dir|save-method|check-interval):' ./config/config.yaml || true
 
-      # ============================================================
-      # 4. Build subs-check
-      #
-      # Build locally instead of using custom ldflags.
-      # This avoids Version / CurrentCommit redeclaration problems.
-      # ============================================================
       - name: Build subs-check
         shell: bash
         run: |
           set -eu
-
           echo "========================================"
           echo "BUILDING SUBS-CHECK"
           echo "========================================"
-
           go build -o ./subs-check .
-
           test -x ./subs-check
-
           ls -lh ./subs-check
 
-      # ============================================================
-      # 5. Prepare output directory
-      # ============================================================
       - name: Prepare output directory
         shell: bash
         run: |
           set -eu
-
           mkdir -p ./output
-
-          rm -f ./output/all.yaml
-          rm -f ./output/subscription.yaml
-          rm -f ./output/us.yaml
-          rm -f ./output/world.yaml
-
+          rm -f ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml
           echo "========================================"
           echo "OUTPUT DIRECTORY"
           echo "========================================"
-
           ls -la ./output
 
-      # ============================================================
-      # 6. Run ONE subs-check cycle
-      #
-      # subs-check normally remains running according to its
-      # check-interval. We therefore start it in the background,
-      # wait for the FIRST genuine all.yaml, then terminate it.
-      # ============================================================
       - name: Run subs-check and capture first completed result
         shell: bash
         run: |
           set -u
-
           echo "========================================"
           echo "STARTING SUBS-CHECK"
           echo "========================================"
-
           : > subs-check.log
-
           ./subs-check -f ./config/config.yaml > subs-check.log 2>&1 &
           PID=$!
-
           echo "subs-check PID: $PID"
 
           cleanup() {
@@ -149,115 +96,76 @@ jobs:
             echo "========================================"
             echo "STOPPING SUBS-CHECK"
             echo "========================================"
-
             if kill -0 "$PID" 2>/dev/null; then
               kill "$PID" 2>/dev/null || true
-
               for i in 1 2 3 4 5; do
                 if ! kill -0 "$PID" 2>/dev/null; then
                   break
                 fi
-
                 sleep 1
               done
-
               if kill -0 "$PID" 2>/dev/null; then
                 kill -9 "$PID" 2>/dev/null || true
               fi
             fi
-
             wait "$PID" 2>/dev/null || true
           }
-
           trap cleanup EXIT
 
           MAX_WAIT=3600
           ELAPSED=0
-
           echo
           echo "Waiting for first completed output..."
           echo "Maximum wait: ${MAX_WAIT}s"
 
           while true; do
-
-            # --------------------------------------------------------
-            # Genuine output detected
-            # --------------------------------------------------------
             if [ -s "./output/all.yaml" ]; then
-
               SIZE=$(wc -c < "./output/all.yaml")
-
               echo
               echo "========================================"
               echo "FIRST COMPLETE OUTPUT DETECTED"
               echo "========================================"
-
               echo "File: output/all.yaml"
               echo "Size: ${SIZE} bytes"
-
               break
             fi
 
-            # --------------------------------------------------------
-            # Detect unexpected termination
-            # --------------------------------------------------------
             if ! kill -0 "$PID" 2>/dev/null; then
-
               echo
               echo "❌ subs-check exited before producing output."
-
               echo
               echo "========================================"
               echo "SUBS-CHECK LOG"
               echo "========================================"
-
               cat subs-check.log || true
-
               exit 1
             fi
 
-            # --------------------------------------------------------
-            # Timeout
-            # --------------------------------------------------------
             if [ "$ELAPSED" -ge "$MAX_WAIT" ]; then
-
               echo
               echo "❌ Timed out waiting for output."
-
               echo
               echo "========================================"
               echo "LAST LOG OUTPUT"
               echo "========================================"
-
               tail -200 subs-check.log || true
-
               exit 1
             fi
 
-            # --------------------------------------------------------
-            # Progress every 30 seconds
-            # --------------------------------------------------------
             if [ $((ELAPSED % 30)) -eq 0 ]; then
-
               echo
               echo "---- subs-check progress (${ELAPSED}s) ----"
-
               tail -15 subs-check.log || true
-
               echo "-------------------------------------------"
             fi
 
             sleep 10
             ELAPSED=$((ELAPSED + 10))
-
           done
 
           echo
           echo "✅ First test cycle completed successfully."
 
-      # ============================================================
-      # 7. Show final subs-check log
-      # ============================================================
       - name: Show final subs-check result
         if: always()
         shell: bash
@@ -265,44 +173,26 @@ jobs:
           echo "========================================"
           echo "SUBS-CHECK FINAL LOG"
           echo "========================================"
-
           cat subs-check.log || true
 
-      # ============================================================
-      # 8. Create stable subscription.yaml
-      # ============================================================
       - name: Create subscription.yaml
         shell: bash
         run: |
           set -eu
-
           test -s ./output/all.yaml
-
           cp ./output/all.yaml ./output/subscription.yaml
-
           echo "========================================"
           echo "BASE OUTPUT"
           echo "========================================"
+          ls -lh ./output/all.yaml ./output/subscription.yaml
 
-          ls -lh \
-            ./output/all.yaml \
-            ./output/subscription.yaml
-
-      # ============================================================
-      # 9. Split output into US and WORLD
-      #
-      # This version correctly detects US proxies by checking the
-      # flag emoji at the start of the proxy name.
-      # ============================================================
       - name: Split US and World subscriptions
         shell: bash
         run: |
           set -eu
-
           echo "========================================"
           echo "SPLITTING US / WORLD OUTPUT"
           echo "========================================"
-
           test -s ./output/all.yaml
 
           python3 <<'PY'
@@ -314,7 +204,6 @@ jobs:
           world_file = Path("output/world.yaml")
 
           text = src.read_text(encoding="utf-8")
-
           lines = text.splitlines(keepends=True)
 
           # Identify the proxies section.
@@ -356,11 +245,6 @@ jobs:
           if current:
               blocks.append(current)
 
-          # ----------------------------------------------------------
-          # US identification: check if the name starts with the US
-          # flag emoji (\U0001F1FA\U0001F1F8) or the exact prefix "US_"
-          # (in case the emoji is missing).
-          # ----------------------------------------------------------
           us_emoji = "\U0001F1FA\U0001F1F8"  # 🇺🇸
 
           us_blocks = []
@@ -369,16 +253,15 @@ jobs:
           for block in blocks:
               name = ""
               if block:
-                  match = re.match(
-                      r"^\s*-\s+name\s*:\s*(.*?)(?:\r?\n)?$",
-                      block[0]
-                  )
+                  match = re.match(r"^\s*-\s+name\s*:\s*(.*?)(?:\r?\n)?$", block[0])
                   if match:
                       name = match.group(1).strip()
 
-              # The name format is typically "🇺🇸US_1|..." so we check:
-              # 1. Starts with the US emoji.
-              # 2. (fallback) starts with "US_" if no emoji.
+                      # Strip surrounding quotes if present
+                      if (name.startswith('"') and name.endswith('"')) or \
+                         (name.startswith("'") and name.endswith("'")):
+                          name = name[1:-1]
+
               if name.startswith(us_emoji) or re.match(r"^US_", name):
                   us_blocks.append(block)
               else:
@@ -401,117 +284,59 @@ jobs:
           print(f"Total proxy entries: {len(blocks)}")
           print(f"US proxy entries:    {len(us_blocks)}")
           print(f"World proxy entries: {len(world_blocks)}")
-          print(
-              f"Count check:         "
-              f"{len(us_blocks)} + {len(world_blocks)} = "
-              f"{len(us_blocks) + len(world_blocks)}"
-          )
-
           if len(us_blocks) + len(world_blocks) != len(blocks):
-              raise SystemExit(
-                  "ERROR: US + World count does not equal total count."
-              )
+              raise SystemExit("ERROR: US + World count does not equal total count.")
           PY
 
           echo
           echo "Generated files:"
+          ls -lh ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml
 
-          ls -lh \
-            ./output/all.yaml \
-            ./output/subscription.yaml \
-            ./output/us.yaml \
-            ./output/world.yaml
-
-      # ============================================================
-      # 10. Validate all generated YAML files
-      # ============================================================
       - name: Validate generated subscriptions
         shell: bash
         run: |
           set -eu
-
           echo "========================================"
           echo "OUTPUT VALIDATION"
           echo "========================================"
-
-          for FILE in \
-            ./output/all.yaml \
-            ./output/subscription.yaml \
-            ./output/us.yaml \
-            ./output/world.yaml
-          do
-
+          for FILE in ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml; do
             if [ ! -s "$FILE" ]; then
               echo "❌ Missing or empty: $FILE"
               exit 1
             fi
-
             echo
             echo "File: $FILE"
             ls -lh "$FILE"
-
-            COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
-              "$FILE" || true)
-
+            COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' "$FILE" || true)
             echo "Proxy entries: $COUNT"
-
           done
-
           echo
           echo "========================================"
           echo "FILE SIZES"
           echo "========================================"
+          wc -c ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml
 
-          wc -c \
-            ./output/all.yaml \
-            ./output/subscription.yaml \
-            ./output/us.yaml \
-            ./output/world.yaml
-
-      # ============================================================
-      # 11. Verify US + World = All
-      #
-      # This prevents accidentally publishing an incomplete split.
-      # ============================================================
       - name: Verify split counts
         shell: bash
         run: |
           set -eu
-
-          ALL_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
-            ./output/all.yaml || true)
-
-          US_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
-            ./output/us.yaml || true)
-
-          WORLD_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' \
-            ./output/world.yaml || true)
-
+          ALL_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' ./output/all.yaml || true)
+          US_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' ./output/us.yaml || true)
+          WORLD_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' ./output/world.yaml || true)
           echo "========================================"
           echo "SPLIT COUNT CHECK"
           echo "========================================"
-
           echo "All:   $ALL_COUNT"
           echo "US:    $US_COUNT"
           echo "World: $WORLD_COUNT"
           echo
           echo "US + World: $((US_COUNT + WORLD_COUNT))"
-
           if [ "$((US_COUNT + WORLD_COUNT))" -ne "$ALL_COUNT" ]; then
-            echo
             echo "❌ SPLIT COUNT MISMATCH"
             exit 1
           fi
-
-          echo
           echo "✅ Split count verified."
 
-      # ============================================================
-      # 12. Upload Actions artifact
-      #
-      # Even if Git push fails, these files remain downloadable
-      # from the Actions run.
-      # ============================================================
       - name: Upload generated subscriptions
         if: always()
         uses: actions/upload-artifact@v4
@@ -526,9 +351,6 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 
-      # ============================================================
-      # 13. Commit and push output
-      # ============================================================
       - name: Commit and push output
         shell: bash
         run: |
@@ -538,15 +360,7 @@ jobs:
           echo "COMMITTING OUTPUT"
           echo "========================================"
 
-          # ----------------------------------------------------------
-          # Verify everything exists before touching Git.
-          # ----------------------------------------------------------
-          for FILE in \
-            output/all.yaml \
-            output/subscription.yaml \
-            output/us.yaml \
-            output/world.yaml
-          do
+          for FILE in output/all.yaml output/subscription.yaml output/us.yaml output/world.yaml; do
             if [ ! -s "$FILE" ]; then
               echo "❌ Missing or empty: $FILE"
               exit 1
@@ -554,30 +368,16 @@ jobs:
           done
 
           echo "Generated files:"
-          ls -lh \
-            output/all.yaml \
-            output/subscription.yaml \
-            output/us.yaml \
-            output/world.yaml
+          ls -lh output/all.yaml output/subscription.yaml output/us.yaml output/world.yaml
 
-          # ----------------------------------------------------------
-          # Configure Git
-          # ----------------------------------------------------------
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          # ----------------------------------------------------------
-          # output/*.yaml may be ignored by the repository.
-          # Force-add them deliberately.
-          # ----------------------------------------------------------
           git add -f output/all.yaml
           git add -f output/subscription.yaml
           git add -f output/us.yaml
           git add -f output/world.yaml
 
-          # ----------------------------------------------------------
-          # Commit only when something changed.
-          # ----------------------------------------------------------
           if git diff --cached --quiet; then
             echo
             echo "ℹ️ No output changes to commit."
@@ -590,9 +390,14 @@ jobs:
 
           git commit -m "Auto-update filtered subscriptions"
 
-          # ----------------------------------------------------------
-          # Push to the branch that triggered the workflow.
-          # ----------------------------------------------------------
+          # Pull latest remote changes to avoid push rejection
+          echo
+          echo "Pulling latest remote changes..."
+          git pull --rebase origin ${GITHUB_REF_NAME} || {
+            echo "⚠️ Rebase failed. Trying to merge with strategy 'ours'."
+            git pull origin ${GITHUB_REF_NAME} --no-rebase --strategy-option=ours
+          }
+
           git push origin HEAD:${GITHUB_REF_NAME}
 
           echo
