@@ -291,13 +291,8 @@ jobs:
       # ============================================================
       # 9. Split output into US and WORLD
       #
-      # IMPORTANT:
-      # - all.yaml is NEVER modified.
-      # - subscription.yaml is the complete list.
-      # - us.yaml contains US nodes.
-      # - world.yaml contains everything else.
-      #
-      # The split is performed against proxy "name" values.
+      # This version correctly detects US proxies by checking the
+      # flag emoji at the start of the proxy name.
       # ============================================================
       - name: Split US and World subscriptions
         shell: bash
@@ -322,9 +317,7 @@ jobs:
 
           lines = text.splitlines(keepends=True)
 
-          # ----------------------------------------------------------
           # Identify the proxies section.
-          # ----------------------------------------------------------
           proxies_start = None
           proxies_end = len(lines)
 
@@ -339,8 +332,6 @@ jobs:
           # Find the end of the proxies list.
           for i in range(proxies_start + 1, len(lines)):
               line = lines[i]
-
-              # A new top-level YAML key ends the proxies section.
               if line and not line.startswith((" ", "\t", "-", "#")):
                   if re.match(r"^[A-Za-z0-9_-]+:\s*", line):
                       proxies_end = i
@@ -350,27 +341,15 @@ jobs:
           proxy_lines = lines[proxies_start + 1:proxies_end]
           footer = lines[proxies_end:]
 
-          # ----------------------------------------------------------
           # Parse individual proxy blocks.
-          #
-          # A proxy starts at:
-          #
-          # - name: ...
-          #
-          # and continues until the next "- name:".
-          # ----------------------------------------------------------
           blocks = []
           current = []
 
           for line in proxy_lines:
-
               if re.match(r"^\s*-\s+name\s*:", line):
-
                   if current:
                       blocks.append(current)
-
                   current = [line]
-
               elif current:
                   current.append(line)
 
@@ -378,66 +357,40 @@ jobs:
               blocks.append(current)
 
           # ----------------------------------------------------------
-          # US identification.
-          #
-          # We deliberately require recognizable location markers
-          # rather than simply matching every occurrence of "us".
+          # US identification: check if the name starts with the US
+          # flag emoji (\U0001F1FA\U0001F1F8) or the exact prefix "US_"
+          # (in case the emoji is missing).
           # ----------------------------------------------------------
-          us_patterns = [
-              r"(^|[\s_\-\[\]\(\)/|])US($|[\s_\-\[\]\(\)/|])",
-              r"(^|[\s_\-\[\]\(\)/|])USA($|[\s_\-\[\]\(\)/|])",
-              r"UNITED[\s_-]*STATES",
-              r"美国",
-          ]
-
-          us_regex = re.compile(
-              "|".join(us_patterns),
-              re.IGNORECASE
-          )
+          us_emoji = "\U0001F1FA\U0001F1F8"  # 🇺🇸
 
           us_blocks = []
           world_blocks = []
 
           for block in blocks:
-
               name = ""
-
               if block:
                   match = re.match(
                       r"^\s*-\s+name\s*:\s*(.*?)(?:\r?\n)?$",
                       block[0]
                   )
-
                   if match:
                       name = match.group(1).strip()
 
-              if us_regex.search(name):
+              # The name format is typically "🇺🇸US_1|..." so we check:
+              # 1. Starts with the US emoji.
+              # 2. (fallback) starts with "US_" if no emoji.
+              if name.startswith(us_emoji) or re.match(r"^US_", name):
                   us_blocks.append(block)
               else:
                   world_blocks.append(block)
 
-          # ----------------------------------------------------------
-          # Preserve the original top-level configuration.
-          #
-          # We create valid standalone Clash/Mihomo YAML files with
-          # the same non-proxy configuration and only change the
-          # proxy list.
-          # ----------------------------------------------------------
           def write_file(path, blocks):
-
               output = []
-
               output.extend(header)
-
               for block in blocks:
                   output.extend(block)
-
               output.extend(footer)
-
-              path.write_text(
-                  "".join(output),
-                  encoding="utf-8"
-              )
+              path.write_text("".join(output), encoding="utf-8")
 
           write_file(us_file, us_blocks)
           write_file(world_file, world_blocks)
@@ -643,4 +596,4 @@ jobs:
           git push origin HEAD:${GITHUB_REF_NAME}
 
           echo
-          echo "=============
+          echo "✅ Push completed."
