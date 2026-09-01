@@ -99,7 +99,8 @@ dns:
     - "223.5.5.5"
     - "119.29.29.29"
 
-sub-urls-remote: []
+sub-urls-remote: 
+  - "https://raw.githubusercontent.com/beck-8/sub-urls/refs/heads/main/%E5%B0%8F%E8%80%8C%E7%BE%8E.txt"
 
 sub-urls:
   - "https://shadowmere.xyz/api/b64sub/"
