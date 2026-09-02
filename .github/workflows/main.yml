@@ -35,24 +35,32 @@ jobs:
         shell: bash
         run: |
           set -eu
+
           echo "========================================"
           echo "REPOSITORY"
           echo "========================================"
+
           echo "Commit:"
           git rev-parse --short HEAD
+
           echo
           echo "Branch:"
           git branch --show-current
+
           echo
           echo "========================================"
           echo "CONFIGURATION"
           echo "========================================"
+
           test -f ./config/config.yaml
+
           echo "Using:"
           ls -lh ./config/config.yaml
+
           echo
           echo "Subscription sources:"
           grep -nE '^[[:space:]]*-[[:space:]]*["'\'']?https?://' ./config/config.yaml || true
+
           echo
           echo "Important settings:"
           grep -nE '^(concurrent|media-concurrent|speed-concurrent|timeout|speed-test-url|min-speed|download-timeout|download-mb|total-speed-limit|media-check|output-dir|save-method|check-interval):' ./config/config.yaml || true
@@ -61,34 +69,51 @@ jobs:
         shell: bash
         run: |
           set -eu
+
           echo "========================================"
           echo "BUILDING SUBS-CHECK"
           echo "========================================"
+
           go build -o ./subs-check .
+
           test -x ./subs-check
+
           ls -lh ./subs-check
 
       - name: Prepare output directory
         shell: bash
         run: |
           set -eu
+
           mkdir -p ./output
-          rm -f ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml
+
+          rm -f \
+            ./output/all.yaml \
+            ./output/subscription.yaml \
+            ./output/us.yaml \
+            ./output/world.yaml
+
           echo "========================================"
           echo "OUTPUT DIRECTORY"
           echo "========================================"
+
           ls -la ./output
 
       - name: Run subs-check and capture first completed result
         shell: bash
         run: |
           set -u
+
           echo "========================================"
           echo "STARTING SUBS-CHECK"
           echo "========================================"
+
           : > subs-check.log
+
           ./subs-check -f ./config/config.yaml > subs-check.log 2>&1 &
+
           PID=$!
+
           echo "subs-check PID: $PID"
 
           cleanup() {
@@ -96,37 +121,48 @@ jobs:
             echo "========================================"
             echo "STOPPING SUBS-CHECK"
             echo "========================================"
+
             if kill -0 "$PID" 2>/dev/null; then
               kill "$PID" 2>/dev/null || true
+
               for i in 1 2 3 4 5; do
                 if ! kill -0 "$PID" 2>/dev/null; then
                   break
                 fi
+
                 sleep 1
               done
+
               if kill -0 "$PID" 2>/dev/null; then
                 kill -9 "$PID" 2>/dev/null || true
               fi
             fi
+
             wait "$PID" 2>/dev/null || true
           }
+
           trap cleanup EXIT
 
           MAX_WAIT=3600
           ELAPSED=0
+
           echo
           echo "Waiting for first completed output..."
           echo "Maximum wait: ${MAX_WAIT}s"
 
           while true; do
+
             if [ -s "./output/all.yaml" ]; then
               SIZE=$(wc -c < "./output/all.yaml")
+
               echo
               echo "========================================"
               echo "FIRST COMPLETE OUTPUT DETECTED"
               echo "========================================"
+
               echo "File: output/all.yaml"
               echo "Size: ${SIZE} bytes"
+
               break
             fi
 
@@ -137,7 +173,9 @@ jobs:
               echo "========================================"
               echo "SUBS-CHECK LOG"
               echo "========================================"
+
               cat subs-check.log || true
+
               exit 1
             fi
 
@@ -148,19 +186,25 @@ jobs:
               echo "========================================"
               echo "LAST LOG OUTPUT"
               echo "========================================"
+
               tail -200 subs-check.log || true
+
               exit 1
             fi
 
             if [ $((ELAPSED % 30)) -eq 0 ]; then
               echo
               echo "---- subs-check progress (${ELAPSED}s) ----"
+
               tail -15 subs-check.log || true
+
               echo "-------------------------------------------"
             fi
 
             sleep 10
+
             ELAPSED=$((ELAPSED + 10))
+
           done
 
           echo
@@ -173,169 +217,618 @@ jobs:
           echo "========================================"
           echo "SUBS-CHECK FINAL LOG"
           echo "========================================"
+
           cat subs-check.log || true
 
       - name: Create subscription.yaml
         shell: bash
         run: |
           set -eu
+
           test -s ./output/all.yaml
+
           cp ./output/all.yaml ./output/subscription.yaml
+
           echo "========================================"
           echo "BASE OUTPUT"
           echo "========================================"
-          ls -lh ./output/all.yaml ./output/subscription.yaml
+
+          ls -lh \
+            ./output/all.yaml \
+            ./output/subscription.yaml
+
+      - name: Install pyyaml
+        shell: bash
+        run: |
+          set -eu
+
+          python3 -m pip install --quiet pyyaml
 
       - name: Split US and World subscriptions
         shell: bash
         run: |
           set -eu
+
           echo "========================================"
           echo "SPLITTING US / WORLD OUTPUT"
           echo "========================================"
+
           test -s ./output/all.yaml
 
           python3 <<'PY'
+          import yaml
           from pathlib import Path
-          import re
 
           src = Path("output/all.yaml")
           us_file = Path("output/us.yaml")
           world_file = Path("output/world.yaml")
 
-          text = src.read_text(encoding="utf-8")
-          lines = text.splitlines(keepends=True)
+          # ------------------------------------------------------------
+          # all.yaml is the authoritative output from subs-check.
+          #
+          # subs-check has already:
+          #   - filtered the subscriptions
+          #   - performed its checks
+          #   - grouped/tested the servers
+          #   - renamed the accepted servers
+          #
+          # This step ONLY separates US from the rest of the world.
+          # ------------------------------------------------------------
 
-          # Identify the proxies section.
-          proxies_start = None
-          proxies_end = len(lines)
+          with src.open("r", encoding="utf-8") as f:
+              data = yaml.safe_load(f)
 
-          for i, line in enumerate(lines):
-              if re.match(r"^proxies:\s*$", line):
-                  proxies_start = i
-                  break
+          if not isinstance(data, dict):
+              raise SystemExit(
+                  "ERROR: all.yaml does not contain a YAML mapping."
+              )
 
-          if proxies_start is None:
-              raise SystemExit("ERROR: Could not find 'proxies:' section.")
+          if "proxies" not in data:
+              raise SystemExit(
+                  "ERROR: Could not find 'proxies:' section."
+              )
 
-          # Find the end of the proxies list.
-          for i in range(proxies_start + 1, len(lines)):
-              line = lines[i]
-              if line and not line.startswith((" ", "\t", "-", "#")):
-                  if re.match(r"^[A-Za-z0-9_-]+:\s*", line):
-                      proxies_end = i
-                      break
+          proxies = data["proxies"]
 
-          header = lines[:proxies_start + 1]
-          proxy_lines = lines[proxies_start + 1:proxies_end]
-          footer = lines[proxies_end:]
+          if not isinstance(proxies, list):
+              raise SystemExit(
+                  "ERROR: 'proxies' is not a YAML list."
+              )
 
-          # Parse individual proxy blocks.
-          blocks = []
-          current = []
+          # This is the naming convention generated by subs-check.
+          #
+          # Example:
+          #   🇺🇸US_1
+          #   🇺🇸US_2
+          #
+          # PyYAML has already decoded YAML Unicode escapes, so we test
+          # the actual Unicode string rather than the literal YAML escape.
+          US_MARKER = "🇺🇸US_"
 
-          for line in proxy_lines:
-              if re.match(r"^\s*-\s+name\s*:", line):
-                  if current:
-                      blocks.append(current)
-                  current = [line]
-              elif current:
-                  current.append(line)
+          us_proxies = []
+          world_proxies = []
 
-          if current:
-              blocks.append(current)
+          for index, proxy in enumerate(proxies, start=1):
 
-          us_emoji = "\U0001F1FA\U0001F1F8"  # 🇺🇸
+              if not isinstance(proxy, dict):
+                  raise SystemExit(
+                      f"ERROR: Proxy #{index} is not a YAML mapping."
+                  )
 
-          us_blocks = []
-          world_blocks = []
+              name = proxy.get("name")
 
-          for block in blocks:
-              name = ""
-              if block:
-                  match = re.match(r"^\s*-\s+name\s*:\s*(.*?)(?:\r?\n)?$", block[0])
-                  if match:
-                      name = match.group(1).strip()
+              if not isinstance(name, str):
+                  raise SystemExit(
+                      f"ERROR: Proxy #{index} has a missing or "
+                      "non-string name."
+                  )
 
-                      # Strip surrounding quotes if present
-                      if (name.startswith('"') and name.endswith('"')) or \
-                         (name.startswith("'") and name.endswith("'")):
-                          name = name[1:-1]
-
-              if name.startswith(us_emoji) or re.match(r"^US_", name):
-                  us_blocks.append(block)
+              if name.startswith(US_MARKER):
+                  us_proxies.append(proxy)
               else:
-                  world_blocks.append(block)
+                  world_proxies.append(proxy)
 
-          def write_file(path, blocks):
-              output = []
-              output.extend(header)
-              for block in blocks:
-                  output.extend(block)
-              output.extend(footer)
-              path.write_text("".join(output), encoding="utf-8")
+          # ------------------------------------------------------------
+          # Preserve the same basic Clash subscription structure.
+          # ------------------------------------------------------------
 
-          write_file(us_file, us_blocks)
-          write_file(world_file, world_blocks)
+          us_data = {
+              "proxies": us_proxies
+          }
+
+          world_data = {
+              "proxies": world_proxies
+          }
+
+          with us_file.open("w", encoding="utf-8") as f:
+              yaml.safe_dump(
+                  us_data,
+                  f,
+                  allow_unicode=True,
+                  default_flow_style=False,
+                  sort_keys=False,
+              )
+
+          with world_file.open("w", encoding="utf-8") as f:
+              yaml.safe_dump(
+                  world_data,
+                  f,
+                  allow_unicode=True,
+                  default_flow_style=False,
+                  sort_keys=False,
+              )
+
+          # ------------------------------------------------------------
+          # Basic sanity check.
+          # ------------------------------------------------------------
+
+          total = len(proxies)
+          us_count = len(us_proxies)
+          world_count = len(world_proxies)
 
           print("========================================")
           print("SPLIT COMPLETE")
           print("========================================")
-          print(f"Total proxy entries: {len(blocks)}")
-          print(f"US proxy entries:    {len(us_blocks)}")
-          print(f"World proxy entries: {len(world_blocks)}")
-          if len(us_blocks) + len(world_blocks) != len(blocks):
-              raise SystemExit("ERROR: US + World count does not equal total count.")
+
+          print(f"Total proxy entries: {total}")
+          print(f"US proxy entries:    {us_count}")
+          print(f"World proxy entries: {world_count}")
+          print(f"US + World:          {us_count + world_count}")
+
+          if us_count + world_count != total:
+              raise SystemExit(
+                  "ERROR: US + World count does not equal total count."
+              )
+
+          print()
+          print(f"US classification marker: {US_MARKER}")
+          print("✅ Split completed successfully.")
+
           PY
 
           echo
           echo "Generated files:"
-          ls -lh ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml
+
+          ls -lh \
+            ./output/all.yaml \
+            ./output/subscription.yaml \
+            ./output/us.yaml \
+            ./output/world.yaml
 
       - name: Validate generated subscriptions
         shell: bash
         run: |
           set -eu
+
           echo "========================================"
           echo "OUTPUT VALIDATION"
           echo "========================================"
-          for FILE in ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml; do
+
+          for FILE in \
+            ./output/all.yaml \
+            ./output/subscription.yaml \
+            ./output/us.yaml \
+            ./output/world.yaml
+          do
+
             if [ ! -s "$FILE" ]; then
               echo "❌ Missing or empty: $FILE"
               exit 1
             fi
+
             echo
             echo "File: $FILE"
+
             ls -lh "$FILE"
-            COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' "$FILE" || true)
-            echo "Proxy entries: $COUNT"
+
+            python3 - "$FILE" <<'PY'
+          import sys
+          import yaml
+          from pathlib import Path
+
+          path = Path(sys.argv[1])
+
+          with path.open("r", encoding="utf-8") as f:
+              data = yaml.safe_load(f)
+
+          if not isinstance(data, dict):
+              raise SystemExit(
+                  f"❌ {path}: invalid YAML root."
+              )
+
+          if "proxies" not in data:
+              raise SystemExit(
+                  f"❌ {path}: missing proxies section."
+              )
+
+          if not isinstance(data["proxies"], list):
+              raise SystemExit(
+                  f"❌ {path}: proxies is not a list."
+              )
+
+          print(f"Proxy entries: {len(data['proxies'])}")
+          PY
+
           done
+
           echo
           echo "========================================"
           echo "FILE SIZES"
           echo "========================================"
-          wc -c ./output/all.yaml ./output/subscription.yaml ./output/us.yaml ./output/world.yaml
 
-      - name: Verify split counts
+          wc -c \
+            ./output/all.yaml \
+            ./output/subscription.yaml \
+            ./output/us.yaml \
+            ./output/world.yaml
+
+      - name: Verify US and World classification
         shell: bash
         run: |
           set -eu
-          ALL_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' ./output/all.yaml || true)
-          US_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' ./output/us.yaml || true)
-          WORLD_COUNT=$(grep -cE '^[[:space:]]*-[[:space:]]*name:' ./output/world.yaml || true)
+
           echo "========================================"
-          echo "SPLIT COUNT CHECK"
+          echo "STRICT US / WORLD VALIDATION"
           echo "========================================"
-          echo "All:   $ALL_COUNT"
-          echo "US:    $US_COUNT"
-          echo "World: $WORLD_COUNT"
-          echo
-          echo "US + World: $((US_COUNT + WORLD_COUNT))"
-          if [ "$((US_COUNT + WORLD_COUNT))" -ne "$ALL_COUNT" ]; then
-            echo "❌ SPLIT COUNT MISMATCH"
-            exit 1
-          fi
-          echo "✅ Split count verified."
+
+          python3 <<'PY'
+          import sys
+          import yaml
+          from pathlib import Path
+
+          ALL = Path("output/all.yaml")
+          SUBSCRIPTION = Path("output/subscription.yaml")
+          US = Path("output/us.yaml")
+          WORLD = Path("output/world.yaml")
+
+          US_MARKER = "🇺🇸US_"
+
+          # ------------------------------------------------------------
+          # Load YAML.
+          # ------------------------------------------------------------
+
+          def load_yaml(path):
+              with path.open("r", encoding="utf-8") as f:
+                  data = yaml.safe_load(f)
+
+              if not isinstance(data, dict):
+                  raise SystemExit(
+                      f"❌ {path}: YAML root is not a mapping."
+                  )
+
+              if "proxies" not in data:
+                  raise SystemExit(
+                      f"❌ {path}: missing proxies section."
+                  )
+
+              if not isinstance(data["proxies"], list):
+                  raise SystemExit(
+                      f"❌ {path}: proxies is not a list."
+                  )
+
+              return data
+
+          all_data = load_yaml(ALL)
+          us_data = load_yaml(US)
+          world_data = load_yaml(WORLD)
+
+          # ------------------------------------------------------------
+          # Extract and validate proxy names.
+          # ------------------------------------------------------------
+
+          def get_names(data, source):
+              names = []
+
+              for index, proxy in enumerate(
+                  data["proxies"],
+                  start=1,
+              ):
+
+                  if not isinstance(proxy, dict):
+                      raise SystemExit(
+                          f"❌ {source}: proxy #{index} is not a mapping."
+                      )
+
+                  name = proxy.get("name")
+
+                  if not isinstance(name, str):
+                      raise SystemExit(
+                          f"❌ {source}: proxy #{index} has no "
+                          "valid string name."
+                      )
+
+                  names.append(name)
+
+              return names
+
+          all_names = get_names(all_data, "all.yaml")
+          us_names = get_names(us_data, "us.yaml")
+          world_names = get_names(world_data, "world.yaml")
+
+          # ------------------------------------------------------------
+          # Detect duplicate names.
+          #
+          # Names are the identity used for classification validation.
+          # Duplicate names make exact membership validation ambiguous,
+          # so fail rather than silently accepting them.
+          # ------------------------------------------------------------
+
+          def duplicates(items):
+              seen = set()
+              result = []
+
+              for item in items:
+                  if item in seen and item not in result:
+                      result.append(item)
+
+                  seen.add(item)
+
+              return result
+
+          duplicate_all = duplicates(all_names)
+          duplicate_us = duplicates(us_names)
+          duplicate_world = duplicates(world_names)
+
+          if duplicate_all:
+              print("❌ Duplicate names found in all.yaml:")
+
+              for name in duplicate_all:
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          if duplicate_us:
+              print("❌ Duplicate names found in us.yaml:")
+
+              for name in duplicate_us:
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          if duplicate_world:
+              print("❌ Duplicate names found in world.yaml:")
+
+              for name in duplicate_world:
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          print("✅ No duplicate proxy names.")
+
+          # ------------------------------------------------------------
+          # Calculate the EXPECTED classification from all.yaml.
+          #
+          # This is critical:
+          #
+          # all.yaml is authoritative.
+          #
+          # We independently calculate which entries SHOULD be US and
+          # which SHOULD be World, then compare that against the actual
+          # generated files.
+          # ------------------------------------------------------------
+
+          expected_us = [
+              name
+              for name in all_names
+              if name.startswith(US_MARKER)
+          ]
+
+          expected_world = [
+              name
+              for name in all_names
+              if not name.startswith(US_MARKER)
+          ]
+
+          # ------------------------------------------------------------
+          # Basic counts.
+          # ------------------------------------------------------------
+
+          all_count = len(all_names)
+          us_count = len(us_names)
+          world_count = len(world_names)
+
+          print()
+          print("========================================")
+          print("COUNTS")
+          print("========================================")
+
+          print(f"All:              {all_count}")
+          print(f"US:               {us_count}")
+          print(f"World:            {world_count}")
+          print(f"US + World:       {us_count + world_count}")
+          print(f"Expected US:      {len(expected_us)}")
+          print(f"Expected World:   {len(expected_world)}")
+
+          if us_count + world_count != all_count:
+              print()
+              print("❌ FAIL: US + World != All")
+              sys.exit(1)
+
+          print()
+          print("✅ Count partition is complete.")
+
+          # ------------------------------------------------------------
+          # Exact US membership validation.
+          # ------------------------------------------------------------
+
+          expected_us_set = set(expected_us)
+          actual_us_set = set(us_names)
+
+          missing_us = expected_us_set - actual_us_set
+          unexpected_us = actual_us_set - expected_us_set
+
+          if missing_us:
+              print()
+              print("❌ FAIL: US proxies missing from us.yaml:")
+
+              for name in sorted(missing_us):
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          if unexpected_us:
+              print()
+              print("❌ FAIL: Non-US proxies found in us.yaml:")
+
+              for name in sorted(unexpected_us):
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          print("✅ us.yaml contains exactly the expected US proxies.")
+
+          # ------------------------------------------------------------
+          # Exact World membership validation.
+          # ------------------------------------------------------------
+
+          expected_world_set = set(expected_world)
+          actual_world_set = set(world_names)
+
+          missing_world = expected_world_set - actual_world_set
+          unexpected_world = actual_world_set - expected_world_set
+
+          if missing_world:
+              print()
+              print("❌ FAIL: World proxies missing from world.yaml:")
+
+              for name in sorted(missing_world):
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          if unexpected_world:
+              print()
+              print("❌ FAIL: US proxies found in world.yaml:")
+
+              for name in sorted(unexpected_world):
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          print(
+              "✅ world.yaml contains exactly the expected "
+              "non-US proxies."
+          )
+
+          # ------------------------------------------------------------
+          # Explicit contamination checks.
+          # ------------------------------------------------------------
+
+          us_in_world = [
+              name
+              for name in world_names
+              if name.startswith(US_MARKER)
+          ]
+
+          non_us_in_us = [
+              name
+              for name in us_names
+              if not name.startswith(US_MARKER)
+          ]
+
+          if us_in_world:
+              print()
+              print("❌ FAIL: US proxies leaked into world.yaml:")
+
+              for name in us_in_world:
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          if non_us_in_us:
+              print()
+              print("❌ FAIL: Non-US proxies leaked into us.yaml:")
+
+              for name in non_us_in_us:
+                  print(f"  {name}")
+
+              sys.exit(1)
+
+          print("✅ No US → World contamination.")
+          print("✅ No World → US contamination.")
+
+          # ------------------------------------------------------------
+          # Verify that US and World together reconstruct all.yaml's
+          # proxy membership exactly.
+          # ------------------------------------------------------------
+
+          if set(us_names) | set(world_names) != set(all_names):
+              print()
+              print(
+                  "❌ FAIL: US + World do not reconstruct "
+                  "all.yaml."
+              )
+
+              sys.exit(1)
+
+          if set(us_names) & set(world_names):
+              print()
+              print(
+                  "❌ FAIL: At least one proxy exists in BOTH "
+                  "us.yaml and world.yaml."
+              )
+
+              sys.exit(1)
+
+          print("✅ US + World reconstruct all.yaml exactly.")
+
+          # ------------------------------------------------------------
+          # Verify subscription.yaml remains an exact copy of all.yaml.
+          #
+          # This workflow must not modify the authoritative general
+          # subscription.
+          # ------------------------------------------------------------
+
+          all_bytes = ALL.read_bytes()
+          subscription_bytes = SUBSCRIPTION.read_bytes()
+
+          if all_bytes != subscription_bytes:
+              print()
+              print(
+                  "❌ FAIL: subscription.yaml is not an exact "
+                  "byte-for-byte copy of all.yaml."
+              )
+
+              sys.exit(1)
+
+          print(
+              "✅ subscription.yaml is byte-for-byte "
+              "identical to all.yaml."
+          )
+
+          # ------------------------------------------------------------
+          # Final result.
+          # ------------------------------------------------------------
+
+          print()
+          print("========================================")
+          print("STRICT VALIDATION PASSED")
+          print("========================================")
+
+          print(f"Total proxies: {all_count}")
+          print(f"US proxies:    {us_count}")
+          print(f"World proxies: {world_count}")
+
+          print()
+          print("Classification marker:")
+          print(f"  {US_MARKER}")
+
+          print()
+          print("All checks passed:")
+          print("  ✅ US + World = All")
+          print("  ✅ Every expected US proxy is in us.yaml")
+          print("  ✅ No US proxy is in world.yaml")
+          print("  ✅ Every expected World proxy is in world.yaml")
+          print("  ✅ No World proxy is in us.yaml")
+          print("  ✅ No duplicate proxy names")
+          print("  ✅ US and World are mutually exclusive")
+          print("  ✅ US + World reconstruct all.yaml")
+          print("  ✅ subscription.yaml == all.yaml")
+
+          print()
+          print("🎉 US / World split is verified correct.")
+
+          PY
 
       - name: Upload generated subscriptions
         if: always()
@@ -360,7 +853,12 @@ jobs:
           echo "COMMITTING OUTPUT"
           echo "========================================"
 
-          for FILE in output/all.yaml output/subscription.yaml output/us.yaml output/world.yaml; do
+          for FILE in \
+            output/all.yaml \
+            output/subscription.yaml \
+            output/us.yaml \
+            output/world.yaml
+          do
             if [ ! -s "$FILE" ]; then
               echo "❌ Missing or empty: $FILE"
               exit 1
@@ -368,7 +866,12 @@ jobs:
           done
 
           echo "Generated files:"
-          ls -lh output/all.yaml output/subscription.yaml output/us.yaml output/world.yaml
+
+          ls -lh \
+            output/all.yaml \
+            output/subscription.yaml \
+            output/us.yaml \
+            output/world.yaml
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
@@ -386,6 +889,7 @@ jobs:
 
           echo
           echo "Changes to commit:"
+
           git diff --cached --stat
 
           git commit -m "Auto-update filtered subscriptions"
@@ -393,9 +897,13 @@ jobs:
           # Pull latest remote changes to avoid push rejection
           echo
           echo "Pulling latest remote changes..."
+
           git pull --rebase origin ${GITHUB_REF_NAME} || {
             echo "⚠️ Rebase failed. Trying to merge with strategy 'ours'."
-            git pull origin ${GITHUB_REF_NAME} --no-rebase --strategy-option=ours
+
+            git pull origin ${GITHUB_REF_NAME} \
+              --no-rebase \
+              --strategy-option=ours
           }
 
           git push origin HEAD:${GITHUB_REF_NAME}
