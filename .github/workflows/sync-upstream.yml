@@ -1,42 +1,77 @@
 name: Sync from Upstream
 
 on:
-  # schedule:
-  #   - cron: "0 9 * * *" # every day
-  workflow_dispatch:  # click the button on Github repo!
-    inputs:
-      sync_test_mode: # Adds a boolean option that appears during manual workflow run for easy test mode config
-        description: 'Fork Sync Test Mode'
-        type: boolean
-        default: false
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: upstream-sync
+  cancel-in-progress: true
 
 jobs:
-  sync_latest_from_upstream:
-    name: Sync latest commits from upstream repo
+  sync:
+    name: Sync upstream while preserving customizations
     runs-on: ubuntu-latest
-    if: ${{ github.event.repository.fork }}
 
     steps:
-      # Step 1: run a standard checkout action
-      - name: Checkout target repo
+      - name: Checkout fork
         uses: actions/checkout@v4
-
-      # Step 2: run the sync action
-      - name: Sync upstream changes
-        id: sync
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
         with:
-          upstream_sync_repo: beck-8/subs-check
-          upstream_sync_branch: master
-          target_sync_branch: master
-          target_repo_token: ${{ secrets.GITHUB_TOKEN }} # automatically generated, no need to set
+          fetch-depth: 0
 
-        # Set test_mode true during manual dispatch to run tests instead of the true action!!
-        test_mode: ${{ inputs.sync_test_mode }}
-
-      - name: Sync check
-        if: failure()
+      - name: Configure git
+        shell: bash
         run: |
-          echo "[Error] 由于上游仓库的 workflow 文件变更，导致 GitHub 自动暂停了本次自动更新，你需要手动 Sync Fork 一次，详细教程请查看：https://github.com/Yidadaa/ChatGPT-Next-Web/blob/main/README_CN.md#%E6%89%93%E5%BC%80%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"
-          echo "[Error] Due to a change in the workflow file of the upstream repository, GitHub has automatically suspended the scheduled automatic update. You need to manually sync your fork. Please refer to the detailed tutorial for instructions: https://github.com/Yidadaa/ChatGPT-Next-Web#enable-automatic-updates"
-          exit 1
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Add upstream remote
+        shell: bash
+        run: |
+          git remote remove upstream 2>/dev/null || true
+          git remote add upstream https://github.com/beck-8/subs-check.git
+          git fetch upstream master
+
+      - name: Backup custom files
+        shell: bash
+        run: |
+          mkdir -p /tmp/subs-custom-backup
+          cp -f config/config.yaml /tmp/subs-custom-backup/config.yaml 2>/dev/null || true
+          cp -f .github/workflows/main.yml /tmp/subs-custom-backup/main.yml 2>/dev/null || true
+          cp -f .github/workflows/sync-upstream.yml /tmp/subs-custom-backup/sync-upstream.yml 2>/dev/null || true
+
+      - name: Merge upstream
+        shell: bash
+        run: |
+          git merge upstream/master -m "Sync upstream changes" || true
+
+          git checkout --ours config/config.yaml 2>/dev/null || true
+          git checkout --ours .github/workflows/main.yml 2>/dev/null || true
+          git checkout --ours .github/workflows/sync-upstream.yml 2>/dev/null || true
+          git checkout --ours output 2>/dev/null || true
+
+          git add .
+          git commit --no-edit || true
+
+      - name: Restore custom files
+        shell: bash
+        run: |
+          cp -f /tmp/subs-custom-backup/config.yaml config/config.yaml 2>/dev/null || true
+          cp -f /tmp/subs-custom-backup/main.yml .github/workflows/main.yml 2>/dev/null || true
+          cp -f /tmp/subs-custom-backup/sync-upstream.yml .github/workflows/sync-upstream.yml 2>/dev/null || true
+
+          git add \
+            config/config.yaml \
+            .github/workflows/main.yml \
+            .github/workflows/sync-upstream.yml
+
+          git commit -m "Restore local workflow customizations" || true
+
+      - name: Push
+        shell: bash
+        run: |
+          git push origin HEAD:${GITHUB_REF_NAME}
