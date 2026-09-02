@@ -1,8 +1,8 @@
 print-progress: true
 
-concurrent: 50
-media-concurrent: 20
-speed-concurrent: 20
+concurrent: 100
+media-concurrent: 50
+speed-concurrent: 50
 shuffle-test-order: true
 
 check-interval: 120
