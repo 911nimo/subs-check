@@ -129,7 +129,6 @@ jobs:
                 if ! kill -0 "$PID" 2>/dev/null; then
                   break
                 fi
-
                 sleep 1
               done
 
@@ -153,6 +152,7 @@ jobs:
           while true; do
 
             if [ -s "./output/all.yaml" ]; then
+
               SIZE=$(wc -c < "./output/all.yaml")
 
               echo
@@ -167,6 +167,7 @@ jobs:
             fi
 
             if ! kill -0 "$PID" 2>/dev/null; then
+
               echo
               echo "❌ subs-check exited before producing output."
               echo
@@ -180,6 +181,7 @@ jobs:
             fi
 
             if [ "$ELAPSED" -ge "$MAX_WAIT" ]; then
+
               echo
               echo "❌ Timed out waiting for output."
               echo
@@ -193,6 +195,7 @@ jobs:
             fi
 
             if [ $((ELAPSED % 30)) -eq 0 ]; then
+
               echo
               echo "---- subs-check progress (${ELAPSED}s) ----"
 
@@ -204,7 +207,6 @@ jobs:
             sleep 10
 
             ELAPSED=$((ELAPSED + 10))
-
           done
 
           echo
@@ -237,99 +239,840 @@ jobs:
             ./output/all.yaml \
             ./output/subscription.yaml
 
-      - name: Install pyyaml
-        shell: bash
-        run: |
-          set -eu
+      # ================================================================
+      # INSTALL PYTHON DEPENDENCIES
+      # ================================================================
 
-          python3 -m pip install --quiet pyyaml
-
-      - name: Split US and World subscriptions
+      - name: Install GeoIP post-processing dependencies
         shell: bash
         run: |
           set -eu
 
           echo "========================================"
-          echo "SPLITTING US / WORLD OUTPUT"
+          echo "INSTALLING GEOIP DEPENDENCIES"
+          echo "========================================"
+
+          python3 -m pip install --quiet --disable-pip-version-check \
+            pyyaml \
+            geoip2
+
+          python3 - <<'PY'
+          import yaml
+          import geoip2
+
+          print("PyYAML: OK")
+          print("geoip2: OK")
+          PY
+
+      # ================================================================
+      # DOWNLOAD INDEPENDENT GEOIP DATABASE
+      #
+      # DB-IP Lite Country MMDB.
+      #
+      # Try the current month first, then the previous month. This is
+      # important during the first few days of a new month because the
+      # latest free monthly database may not have been published yet.
+      # ================================================================
+
+      - name: Download independent GeoIP database
+        shell: bash
+        run: |
+          set -eu
+
+          echo "========================================"
+          echo "DOWNLOADING INDEPENDENT GEOIP DATABASE"
+          echo "========================================"
+
+          mkdir -p .geoip
+
+          CURRENT_MONTH="$(date -u +%Y-%m)"
+
+          PREVIOUS_MONTH="$(
+            date -u -d '1 month ago' +%Y-%m
+          )"
+
+          DB_FILE=".geoip/dbip-country.mmdb"
+
+          DOWNLOADED=""
+
+          for MONTH in "$CURRENT_MONTH" "$PREVIOUS_MONTH"; do
+
+            URL="https://download.db-ip.com/free/dbip-country-lite-${MONTH}.mmdb.gz"
+
+            echo
+            echo "Trying DB-IP Country Lite:"
+            echo "  ${URL}"
+
+            if curl \
+                --fail \
+                --location \
+                --silent \
+                --show-error \
+                --retry 5 \
+                --retry-delay 3 \
+                --connect-timeout 20 \
+                --max-time 180 \
+                "$URL" \
+                -o ".geoip/dbip-country.mmdb.gz"; then
+
+              if gzip -t ".geoip/dbip-country.mmdb.gz" 2>/dev/null; then
+
+                gzip -dc \
+                  ".geoip/dbip-country.mmdb.gz" \
+                  > "$DB_FILE"
+
+                if [ -s "$DB_FILE" ]; then
+                  DOWNLOADED="$MONTH"
+                  break
+                fi
+
+              fi
+            fi
+
+            echo "Database for ${MONTH} was not available."
+          done
+
+          if [ -z "$DOWNLOADED" ]; then
+            echo
+            echo "❌ Could not download a DB-IP Country Lite database."
+            exit 1
+          fi
+
+          test -s "$DB_FILE"
+
+          echo
+          echo "✅ GeoIP database downloaded."
+          echo "Release used: ${DOWNLOADED}"
+          echo "Database:"
+          ls -lh "$DB_FILE"
+
+      # ================================================================
+      # GEOIP POST-PROCESSING
+      #
+      # IMPORTANT:
+      #
+      # all.yaml remains untouched.
+      #
+      # subscription.yaml remains a byte-for-byte copy of all.yaml.
+      #
+      # For each proxy:
+      #
+      #   server hostname
+      #       ↓
+      #   DNS resolution
+      #       ↓
+      #   independent DB-IP country lookup
+      #       ↓
+      #   compare against subs-check prefix
+      #       ↓
+      #   replace ONLY the country prefix if necessary
+      #
+      # Example:
+      #
+      #   🇺🇸US_1|Netflix|123Mbps
+      #
+      # if IP is actually France:
+      #
+      #   🇫🇷FR_1|Netflix|123Mbps
+      #
+      # Everything after the prefix remains unchanged.
+      #
+      # server: is NEVER changed.
+      # ================================================================
+
+      - name: Correct country prefixes and split US / World
+        shell: bash
+        env:
+          GEOIP_DB: ${{ github.workspace }}/.geoip/dbip-country.mmdb
+        run: |
+          set -eu
+
+          echo "========================================"
+          echo "GEOIP COUNTRY CORRECTION"
           echo "========================================"
 
           test -s ./output/all.yaml
+          test -s "$GEOIP_DB"
 
           python3 <<'PY'
+          import copy
+          import ipaddress
+          import os
+          import re
+          import socket
+          from collections import Counter
+
+          import geoip2.database
           import yaml
-          from pathlib import Path
 
-          src = Path("output/all.yaml")
-          us_file = Path("output/us.yaml")
-          world_file = Path("output/world.yaml")
+
+          ALL_FILE = "output/all.yaml"
+          SUBSCRIPTION_FILE = "output/subscription.yaml"
+          US_FILE = "output/us.yaml"
+          WORLD_FILE = "output/world.yaml"
+
+          GEOIP_DB = os.environ["GEOIP_DB"]
+
 
           # ------------------------------------------------------------
-          # all.yaml is the authoritative output from subs-check.
-          #
-          # subs-check has already:
-          #   - filtered the subscriptions
-          #   - performed its checks
-          #   - grouped/tested the servers
-          #   - renamed the accepted servers
-          #
-          # This step ONLY separates US from the rest of the world.
+          # Load authoritative subs-check output
           # ------------------------------------------------------------
 
-          with src.open("r", encoding="utf-8") as f:
-              data = yaml.safe_load(f)
+          with open(ALL_FILE, "r", encoding="utf-8") as f:
+              root = yaml.safe_load(f)
 
-          if not isinstance(data, dict):
-              raise SystemExit(
-                  "ERROR: all.yaml does not contain a YAML mapping."
+          if not isinstance(root, dict):
+              raise RuntimeError(
+                  "all.yaml root is not a YAML mapping"
               )
 
-          if "proxies" not in data:
-              raise SystemExit(
-                  "ERROR: Could not find 'proxies:' section."
-              )
-
-          proxies = data["proxies"]
+          proxies = root.get("proxies")
 
           if not isinstance(proxies, list):
-              raise SystemExit(
-                  "ERROR: 'proxies' is not a YAML list."
+              raise RuntimeError(
+                  "all.yaml does not contain a valid 'proxies' list"
               )
 
-          # This is the naming convention generated by subs-check.
+          print(f"Input proxies: {len(proxies)}")
+
+
+          # ------------------------------------------------------------
+          # Country helpers
+          # ------------------------------------------------------------
+
+          def flag(code):
+              """
+              Convert ISO alpha-2 country code to flag emoji.
+
+              US -> 🇺🇸
+              FR -> 🇫🇷
+              DE -> 🇩🇪
+              """
+              if not code:
+                  return ""
+
+              code = code.upper()
+
+              if len(code) != 2:
+                  return ""
+
+              if not code.isalpha():
+                  return ""
+
+              return "".join(
+                  chr(
+                      0x1F1E6
+                      + ord(char)
+                      - ord("A")
+                  )
+                  for char in code
+              )
+
+
+          def country_from_db(ip, reader):
+              """
+              Return:
+
+                  (country_code, country_name)
+
+              or:
+
+                  (None, None)
+              """
+
+              try:
+                  result = reader.country(ip)
+
+                  code = result.country.iso_code
+
+                  if not code:
+                      return None, None
+
+                  code = code.upper()
+
+                  name = None
+
+                  try:
+                      names = result.country.names
+
+                      if isinstance(names, dict):
+                          name = (
+                              names.get("en")
+                              or names.get("en-US")
+                              or next(
+                                  iter(names.values()),
+                                  None,
+                              )
+                          )
+                  except Exception:
+                      pass
+
+                  if not name:
+                      name = code
+
+                  return code, name
+
+              except Exception:
+                  return None, None
+
+
+          # ------------------------------------------------------------
+          # Detect an existing country prefix
           #
-          # Example:
+          # Supported:
+          #
           #   🇺🇸US_1
-          #   🇺🇸US_2
+          #   🇫🇷FR_1
+          #   🇩🇪DE_123
           #
-          # PyYAML has already decoded YAML Unicode escapes, so we test
-          # the actual Unicode string rather than the literal YAML escape.
-          US_MARKER = "🇺🇸US_"
+          # Also recognizes old/simple:
+          #
+          #   US_1
+          #   FR_1
+          #
+          # We return:
+          #
+          #   original_country_code
+          #   remaining_name
+          #   prefix_start/end
+          #
+          # The remainder is preserved exactly.
+          # ------------------------------------------------------------
+
+          ISO_RE = re.compile(
+              r"^(?P<code>[A-Z]{2})_(?P<rest>.*)$"
+          )
+
+
+          def parse_name_prefix(name):
+              if not isinstance(name, str):
+                  return None, name
+
+              # --------------------------------------------------------
+              # Unicode flag + ISO:
+              #
+              # 🇺🇸US_1
+              #
+              # First two Unicode code points are regional indicators.
+              # --------------------------------------------------------
+
+              if len(name) >= 5:
+
+                  c1 = ord(name[0])
+                  c2 = ord(name[1])
+
+                  if (
+                      0x1F1E6 <= c1 <= 0x1F1FF
+                      and
+                      0x1F1E6 <= c2 <= 0x1F1FF
+                  ):
+
+                      flag_code = (
+                          chr(
+                              ord("A")
+                              + c1
+                              - 0x1F1E6
+                          )
+                          +
+                          chr(
+                              ord("A")
+                              + c2
+                              - 0x1F1E6
+                          )
+                      )
+
+                      # Expected:
+                      #
+                      # 🇺🇸US_
+                      #
+                      if (
+                          name[2:4].upper() == flag_code
+                          and name[4] == "_"
+                      ):
+                          return (
+                              flag_code,
+                              name[5:],
+                          )
+
+              # --------------------------------------------------------
+              # ASCII:
+              #
+              # US_1
+              # FR_123
+              # --------------------------------------------------------
+
+              match = ISO_RE.match(name)
+
+              if match:
+                  return (
+                      match.group("code"),
+                      match.group("rest"),
+                  )
+
+              return None, name
+
+
+          def replace_country_prefix(
+              original_name,
+              country_code,
+          ):
+              """
+              Replace ONLY the country prefix.
+
+              Examples:
+
+                  🇺🇸US_1
+                  -> 🇫🇷FR_1
+
+                  🇺🇸US_123|NF|OpenAI
+                  -> 🇫🇷FR_123|NF|OpenAI
+
+                  US_1
+                  -> 🇫🇷FR_1
+
+              If no recognizable prefix exists:
+
+                  Node 123
+                  -> 🇫🇷FR_Node 123
+
+              The remainder is never modified.
+              """
+
+              if not isinstance(original_name, str):
+                  original_name = ""
+
+              code = country_code.upper()
+
+              country_prefix = f"{flag(code)}{code}_"
+
+              old_code, remainder = parse_name_prefix(
+                  original_name
+              )
+
+              if old_code is not None:
+                  # Existing prefix detected.
+                  #
+                  # Replace ONLY the prefix.
+                  return country_prefix + remainder
+
+              # No recognizable country prefix.
+              #
+              # Add one, preserving the complete existing name.
+              if original_name:
+                  return (
+                      country_prefix
+                      + original_name
+                  )
+
+              return (
+                  country_prefix
+                  + "Node"
+              )
+
+
+          # ------------------------------------------------------------
+          # Resolve hostname
+          #
+          # Important:
+          #
+          # We DO NOT modify proxy["server"].
+          #
+          # We only use its resolved IP for GeoIP.
+          # ------------------------------------------------------------
+
+          dns_cache = {}
+
+
+          def resolve_server(server):
+              if server in dns_cache:
+                  return dns_cache[server]
+
+              server = server.strip()
+
+              # --------------------------------------------------------
+              # Already an IP
+              # --------------------------------------------------------
+
+              try:
+                  ip = ipaddress.ip_address(server)
+
+                  result = [str(ip)]
+
+                  dns_cache[server] = result
+
+                  return result
+
+              except ValueError:
+                  pass
+
+              # --------------------------------------------------------
+              # Hostname
+              #
+              # Query IPv4 and IPv6 separately so that we can see
+              # whether the hostname has different geographic results.
+              # --------------------------------------------------------
+
+              addresses = []
+
+              for family in (
+                  socket.AF_INET,
+                  socket.AF_INET6,
+              ):
+
+                  try:
+
+                      infos = socket.getaddrinfo(
+                          server,
+                          None,
+                          family,
+                          socket.SOCK_STREAM,
+                      )
+
+                      for info in infos:
+
+                          sockaddr = info[4]
+
+                          if not sockaddr:
+                              continue
+
+                          candidate = sockaddr[0]
+
+                          try:
+                              ip = ipaddress.ip_address(
+                                  candidate
+                              )
+                          except ValueError:
+                              continue
+
+                          candidate = str(ip)
+
+                          if candidate not in addresses:
+                              addresses.append(candidate)
+
+                  except Exception:
+                      continue
+
+              dns_cache[server] = addresses
+
+              return addresses
+
+
+          # ------------------------------------------------------------
+          # GeoIP cache
+          # ------------------------------------------------------------
+
+          geo_cache = {}
+
+
+          def lookup_ip(ip, reader):
+              if ip in geo_cache:
+                  return geo_cache[ip]
+
+              result = country_from_db(
+                  ip,
+                  reader,
+              )
+
+              geo_cache[ip] = result
+
+              return result
+
+
+          # ------------------------------------------------------------
+          # Counters / reporting
+          # ------------------------------------------------------------
 
           us_proxies = []
           world_proxies = []
 
-          for index, proxy in enumerate(proxies, start=1):
+          country_counts = Counter()
 
-              if not isinstance(proxy, dict):
-                  raise SystemExit(
-                      f"ERROR: Proxy #{index} is not a YAML mapping."
-                  )
+          mismatch_counts = Counter()
 
-              name = proxy.get("name")
+          mismatch_examples = []
 
-              if not isinstance(name, str):
-                  raise SystemExit(
-                      f"ERROR: Proxy #{index} has a missing or "
-                      "non-string name."
-                  )
+          dns_failures = 0
+          geo_failures = 0
+          malformed_nodes = 0
+          ambiguous_dns = 0
+          unchanged_names = 0
+          corrected_names = 0
+          added_prefixes = 0
 
-              if name.startswith(US_MARKER):
-                  us_proxies.append(proxy)
-              else:
-                  world_proxies.append(proxy)
 
           # ------------------------------------------------------------
-          # Preserve the same basic Clash subscription structure.
+          # Process
+          # ------------------------------------------------------------
+
+          reader = geoip2.database.Reader(
+              GEOIP_DB
+          )
+
+          try:
+
+              total = len(proxies)
+
+              for index, original in enumerate(
+                  proxies,
+                  start=1,
+              ):
+
+                  if not isinstance(
+                      original,
+                      dict,
+                  ):
+                      malformed_nodes += 1
+
+                      # Preserve malformed entries in World.
+                      world_proxies.append(
+                          copy.deepcopy(original)
+                      )
+
+                      continue
+
+                  proxy = copy.deepcopy(
+                      original
+                  )
+
+                  server = proxy.get("server")
+
+                  original_name = proxy.get(
+                      "name"
+                  )
+
+                  if not isinstance(
+                      original_name,
+                      str,
+                  ):
+                      original_name = ""
+
+                  # ----------------------------------------------------
+                  # Missing server
+                  # ----------------------------------------------------
+
+                  if not isinstance(
+                      server,
+                      str,
+                  ) or not server.strip():
+
+                      malformed_nodes += 1
+
+                      # We cannot independently determine a country.
+                      #
+                      # Keep original name unchanged.
+                      world_proxies.append(proxy)
+
+                      continue
+
+                  server = server.strip()
+
+                  # ----------------------------------------------------
+                  # DNS
+                  # ----------------------------------------------------
+
+                  ips = resolve_server(
+                      server
+                  )
+
+                  if not ips:
+
+                      dns_failures += 1
+
+                      # IMPORTANT:
+                      #
+                      # GeoIP failure does NOT destroy the existing
+                      # subs-check country prefix.
+                      #
+                      # The node is retained in World because we cannot
+                      # independently prove that it is US.
+
+                      world_proxies.append(proxy)
+
+                      continue
+
+                  # ----------------------------------------------------
+                  # GeoIP every resolved address.
+                  #
+                  # Usually A/AAAA addresses agree.
+                  #
+                  # If they disagree, prefer the first IPv4 result,
+                  # which is the first address returned by our resolver
+                  # order.
+                  # ----------------------------------------------------
+
+                  geo_results = []
+
+                  for ip in ips:
+
+                      code, cname = lookup_ip(
+                          ip,
+                          reader,
+                      )
+
+                      if code:
+                          geo_results.append(
+                              (
+                                  ip,
+                                  code,
+                                  cname,
+                              )
+                          )
+
+                  if not geo_results:
+
+                      geo_failures += 1
+
+                      # Preserve original name.
+                      world_proxies.append(proxy)
+
+                      continue
+
+                  unique_codes = {
+                      result[1]
+                      for result in geo_results
+                  }
+
+                  if len(unique_codes) > 1:
+                      ambiguous_dns += 1
+
+                  # Prefer IPv4 result when available.
+                  selected = None
+
+                  for result in geo_results:
+
+                      try:
+                          ip_obj = ipaddress.ip_address(
+                              result[0]
+                          )
+
+                          if ip_obj.version == 4:
+                              selected = result
+                              break
+
+                      except Exception:
+                          continue
+
+                  if selected is None:
+                      selected = geo_results[0]
+
+                  resolved_ip, actual_code, actual_name = selected
+
+                  # ----------------------------------------------------
+                  # Existing country prefix
+                  # ----------------------------------------------------
+
+                  old_code, remainder = parse_name_prefix(
+                      original_name
+                  )
+
+                  # ----------------------------------------------------
+                  # Country comparison
+                  # ----------------------------------------------------
+
+                  if (
+                      old_code is not None
+                      and
+                      old_code.upper()
+                      == actual_code.upper()
+                  ):
+
+                      # Country already correct.
+                      #
+                      # Leave the ENTIRE name untouched.
+                      proxy["name"] = original_name
+
+                      unchanged_names += 1
+
+                  else:
+
+                      # ------------------------------------------------
+                      # Mismatch or missing prefix.
+                      #
+                      # Replace ONLY the prefix.
+                      # ------------------------------------------------
+
+                      new_name = replace_country_prefix(
+                          original_name,
+                          actual_code,
+                      )
+
+                      proxy["name"] = new_name
+
+                      if old_code is None:
+                          added_prefixes += 1
+
+                      else:
+                          corrected_names += 1
+
+                          mismatch_counts[
+                              (
+                                  old_code.upper(),
+                                  actual_code.upper(),
+                              )
+                          ] += 1
+
+                          if len(mismatch_examples) < 100:
+
+                              mismatch_examples.append(
+                                  {
+                                      "old": original_name,
+                                      "new": new_name,
+                                      "server": server,
+                                      "ip": resolved_ip,
+                                      "from": old_code.upper(),
+                                      "to": actual_code.upper(),
+                                  }
+                              )
+
+                  # ----------------------------------------------------
+                  # Country statistics
+                  # ----------------------------------------------------
+
+                  country_counts[
+                      actual_code.upper()
+                  ] += 1
+
+                  # ----------------------------------------------------
+                  # IMPORTANT:
+                  #
+                  # Classification is based on independent GeoIP,
+                  # NOT on the original subs-check name.
+                  # ----------------------------------------------------
+
+                  if actual_code.upper() == "US":
+                      us_proxies.append(proxy)
+                  else:
+                      world_proxies.append(proxy)
+
+                  # ----------------------------------------------------
+                  # Progress
+                  # ----------------------------------------------------
+
+                  if (
+                      index % 500 == 0
+                      or index == total
+                  ):
+
+                      print(
+                          f"Processed "
+                          f"{index}/{total} "
+                          f"| US={len(us_proxies)} "
+                          f"| World={len(world_proxies)} "
+                          f"| corrected={corrected_names} "
+                          f"| DNS-failed={dns_failures} "
+                          f"| GeoIP-failed={geo_failures}"
+                      )
+
+          finally:
+              reader.close()
+
+
+          # ------------------------------------------------------------
+          # Write YAML outputs
+          #
+          # Only the split/corrected files are rewritten.
+          #
+          # all.yaml and subscription.yaml remain untouched.
           # ------------------------------------------------------------
 
           us_data = {
@@ -340,60 +1083,577 @@ jobs:
               "proxies": world_proxies
           }
 
-          with us_file.open("w", encoding="utf-8") as f:
-              yaml.safe_dump(
-                  us_data,
-                  f,
-                  allow_unicode=True,
-                  default_flow_style=False,
-                  sort_keys=False,
-              )
 
-          with world_file.open("w", encoding="utf-8") as f:
-              yaml.safe_dump(
-                  world_data,
-                  f,
-                  allow_unicode=True,
-                  default_flow_style=False,
-                  sort_keys=False,
-              )
+          def write_yaml(
+              path,
+              data,
+          ):
+
+              with open(
+                  path,
+                  "w",
+                  encoding="utf-8",
+              ) as f:
+
+                  yaml.safe_dump(
+                      data,
+                      f,
+                      allow_unicode=True,
+                      default_flow_style=False,
+                      sort_keys=False,
+                      width=100000,
+                  )
+
+
+          write_yaml(
+              US_FILE,
+              us_data,
+          )
+
+          write_yaml(
+              WORLD_FILE,
+              world_data,
+          )
+
 
           # ------------------------------------------------------------
-          # Basic sanity check.
+          # Validate generated YAML
           # ------------------------------------------------------------
 
-          total = len(proxies)
-          us_count = len(us_proxies)
-          world_count = len(world_proxies)
+          with open(
+              US_FILE,
+              "r",
+              encoding="utf-8",
+          ) as f:
+              check_us = yaml.safe_load(f)
 
-          print("========================================")
-          print("SPLIT COMPLETE")
-          print("========================================")
+          with open(
+              WORLD_FILE,
+              "r",
+              encoding="utf-8",
+          ) as f:
+              check_world = yaml.safe_load(f)
 
-          print(f"Total proxy entries: {total}")
-          print(f"US proxy entries:    {us_count}")
-          print(f"World proxy entries: {world_count}")
-          print(f"US + World:          {us_count + world_count}")
 
-          if us_count + world_count != total:
-              raise SystemExit(
-                  "ERROR: US + World count does not equal total count."
+          if not isinstance(
+              check_us,
+              dict,
+          ):
+              raise RuntimeError(
+                  "us.yaml root is not a mapping"
               )
+
+          if not isinstance(
+              check_world,
+              dict,
+          ):
+              raise RuntimeError(
+                  "world.yaml root is not a mapping"
+              )
+
+
+          check_us_list = check_us.get(
+              "proxies"
+          )
+
+          check_world_list = check_world.get(
+              "proxies"
+          )
+
+
+          if not isinstance(
+              check_us_list,
+              list,
+          ):
+              raise RuntimeError(
+                  "us.yaml proxies is not a list"
+              )
+
+          if not isinstance(
+              check_world_list,
+              list,
+          ):
+              raise RuntimeError(
+                  "world.yaml proxies is not a list"
+              )
+
+
+          # ------------------------------------------------------------
+          # Validate names
+          # ------------------------------------------------------------
+
+          for filename, items in (
+              (
+                  US_FILE,
+                  check_us_list,
+              ),
+              (
+                  WORLD_FILE,
+                  check_world_list,
+              ),
+          ):
+
+              for number, proxy in enumerate(
+                  items,
+                  start=1,
+              ):
+
+                  if not isinstance(
+                      proxy,
+                      dict,
+                  ):
+                      raise RuntimeError(
+                          f"{filename}: "
+                          f"proxy #{number} "
+                          "is not a mapping"
+                      )
+
+                  if not isinstance(
+                      proxy.get("name"),
+                      str,
+                  ):
+                      raise RuntimeError(
+                          f"{filename}: "
+                          f"proxy #{number} "
+                          "has no string name"
+                      )
+
+
+          # ------------------------------------------------------------
+          # Validate that US + World contains exactly every original
+          # proxy.
+          #
+          # We compare normalized proxy objects, ignoring YAML
+          # formatting differences.
+          #
+          # This also detects accidental deletion or duplication.
+          # ------------------------------------------------------------
+
+          def normalized(proxy):
+
+              return yaml.safe_dump(
+                  proxy,
+                  allow_unicode=True,
+                  default_flow_style=False,
+                  sort_keys=True,
+              )
+
+
+          original_counter = Counter(
+              normalized(proxy)
+              for proxy in proxies
+              if isinstance(proxy, dict)
+          )
+
+          output_counter = Counter(
+              normalized(proxy)
+              for proxy in (
+                  check_us_list
+                  +
+                  check_world_list
+              )
+              if isinstance(proxy, dict)
+          )
+
+
+          if original_counter != output_counter:
+
+              missing = (
+                  original_counter
+                  -
+                  output_counter
+              )
+
+              extra = (
+                  output_counter
+                  -
+                  original_counter
+              )
+
+              print(
+                  f"Original proxies: "
+                  f"{sum(original_counter.values())}"
+              )
+
+              print(
+                  f"Output proxies:   "
+                  f"{sum(output_counter.values())}"
+              )
+
+              print(
+                  f"Missing proxies:  "
+                  f"{sum(missing.values())}"
+              )
+
+              print(
+                  f"Extra proxies:    "
+                  f"{sum(extra.values())}"
+              )
+
+              raise RuntimeError(
+                  "VALIDATION FAILED: "
+                  "US + World does not exactly "
+                  "reconstruct all.yaml"
+              )
+
+
+          # ------------------------------------------------------------
+          # Ensure no proxy is present in both outputs.
+          # ------------------------------------------------------------
+
+          us_keys = {
+              normalized(proxy)
+              for proxy in check_us_list
+              if isinstance(proxy, dict)
+          }
+
+          world_keys = {
+              normalized(proxy)
+              for proxy in check_world_list
+              if isinstance(proxy, dict)
+          }
+
+          overlap = (
+              us_keys
+              &
+              world_keys
+          )
+
+          if overlap:
+
+              raise RuntimeError(
+                  "VALIDATION FAILED: "
+                  f"{len(overlap)} proxies exist "
+                  "in both US and World"
+              )
+
+
+          # ------------------------------------------------------------
+          # Verify EVERY US node has the corrected US prefix.
+          #
+          # This is an important safety check:
+          #
+          # If GeoIP says US, the resulting name must begin with:
+          #
+          #     🇺🇸US_
+          # ------------------------------------------------------------
+
+          bad_us = []
+
+          for proxy in check_us_list:
+
+              name = proxy.get(
+                  "name",
+                  "",
+              )
+
+              if not name.startswith(
+                  "🇺🇸US_"
+              ):
+
+                  bad_us.append(
+                      name
+                  )
+
+
+          if bad_us:
+
+              print(
+                  "Examples of invalid US names:"
+              )
+
+              for name in bad_us[:20]:
+                  print(
+                      f"  {name}"
+                  )
+
+              raise RuntimeError(
+                  "VALIDATION FAILED: "
+                  f"{len(bad_us)} US nodes "
+                  "do not have the 🇺🇸US_ prefix"
+              )
+
+
+          # ------------------------------------------------------------
+          # Verify subscription.yaml is byte-for-byte identical to
+          # all.yaml.
+          # ------------------------------------------------------------
+
+          with open(
+              ALL_FILE,
+              "rb",
+          ) as f:
+              all_bytes = f.read()
+
+          with open(
+              SUBSCRIPTION_FILE,
+              "rb",
+          ) as f:
+              subscription_bytes = f.read()
+
+
+          if (
+              all_bytes
+              !=
+              subscription_bytes
+          ):
+
+              raise RuntimeError(
+                  "VALIDATION FAILED: "
+                  "subscription.yaml is not "
+                  "byte-for-byte identical "
+                  "to all.yaml"
+              )
+
+
+          # ------------------------------------------------------------
+          # Print summary
+          # ------------------------------------------------------------
 
           print()
-          print(f"US classification marker: {US_MARKER}")
-          print("✅ Split completed successfully.")
+          print("=" * 72)
+          print(
+              "GEOIP POST-PROCESSING COMPLETE"
+          )
+          print("=" * 72)
 
+          print(
+              f"Input nodes:          {len(proxies)}"
+          )
+
+          print(
+              f"US nodes:             {len(check_us_list)}"
+          )
+
+          print(
+              f"World nodes:          {len(check_world_list)}"
+          )
+
+          print(
+              f"Country already OK:   {unchanged_names}"
+          )
+
+          print(
+              f"Country corrected:    {corrected_names}"
+          )
+
+          print(
+              f"Prefix added:         {added_prefixes}"
+          )
+
+          print(
+              f"DNS failures:         {dns_failures}"
+          )
+
+          print(
+              f"GeoIP failures:       {geo_failures}"
+          )
+
+          print(
+              f"Ambiguous A/AAAA:     {ambiguous_dns}"
+          )
+
+          print(
+              f"Malformed nodes:      {malformed_nodes}"
+          )
+
+          print()
+          print(
+              "Country distribution:"
+          )
+
+          for code, count in (
+              country_counts.most_common(50)
+          ):
+
+              print(
+                  f"  {flag(code)} "
+                  f"{code:<3} "
+                  f"{count}"
+              )
+
+
+          # ------------------------------------------------------------
+          # Country mismatch report
+          # ------------------------------------------------------------
+
+          print()
+          print("=" * 72)
+          print(
+              "SUBS-CHECK vs INDEPENDENT GEOIP MISMATCHES"
+          )
+          print("=" * 72)
+
+          if not mismatch_counts:
+
+              print(
+                  "No country-prefix mismatches detected."
+              )
+
+          else:
+
+              for (
+                  old_code,
+                  new_code,
+              ), count in mismatch_counts.most_common():
+
+                  print(
+                      f"  "
+                      f"{flag(old_code)}{old_code}"
+                      f" -> "
+                      f"{flag(new_code)}{new_code}"
+                      f" : "
+                      f"{count} nodes"
+                  )
+
+
+          if mismatch_examples:
+
+              print()
+              print(
+                  "Mismatch examples "
+                  "(maximum 100):"
+              )
+
+              for example in mismatch_examples:
+
+                  print()
+                  print(
+                      f"  OLD:    "
+                      f"{example['old']}"
+                  )
+
+                  print(
+                      f"  NEW:    "
+                      f"{example['new']}"
+                  )
+
+                  print(
+                      f"  SERVER: "
+                      f"{example['server']}"
+                  )
+
+                  print(
+                      f"  IP:     "
+                      f"{example['ip']}"
+                  )
+
+                  print(
+                      f"  GEOIP:  "
+                      f"{example['from']}"
+                      f" -> "
+                      f"{example['to']}"
+                  )
+
+
+          print()
+          print("=" * 72)
+          print(
+              "VALIDATION: PASSED"
+          )
+          print("=" * 72)
+
+          print()
+          print(
+              "Important:"
+          )
+
+          print(
+              "  server hostnames were NOT modified."
+          )
+
+          print(
+              "  Only country prefixes in node names "
+              "were corrected."
+          )
+
+          print(
+              "  US/World classification uses "
+              "independent GeoIP."
+          )
+
+          print("=" * 72)
           PY
 
           echo
           echo "Generated files:"
-
           ls -lh \
             ./output/all.yaml \
             ./output/subscription.yaml \
             ./output/us.yaml \
             ./output/world.yaml
+
+      # ================================================================
+      # SHOW GENERATED NAMES
+      # ================================================================
+
+      - name: Show generated country names
+        shell: bash
+        run: |
+          set -eu
+
+          echo "========================================"
+          echo "US NODE SAMPLE"
+          echo "========================================"
+
+          python3 - <<'PY'
+          import yaml
+
+          with open(
+              "output/us.yaml",
+              encoding="utf-8",
+          ) as f:
+              data = yaml.safe_load(f) or {}
+
+          proxies = data.get("proxies") or []
+
+          for proxy in proxies[:30]:
+              print(
+                  proxy.get(
+                      "name",
+                      ""
+                  )
+              )
+
+          print()
+          print(
+              f"Total US nodes: {len(proxies)}"
+          )
+          PY
+
+          echo
+          echo "========================================"
+          echo "WORLD NODE SAMPLE"
+          echo "========================================"
+
+          python3 - <<'PY'
+          import yaml
+
+          with open(
+              "output/world.yaml",
+              encoding="utf-8",
+          ) as f:
+              data = yaml.safe_load(f) or {}
+
+          proxies = data.get("proxies") or []
+
+          for proxy in proxies[:30]:
+              print(
+                  proxy.get(
+                      "name",
+                      ""
+                  )
+              )
+
+          print()
+          print(
+              f"Total World nodes: {len(proxies)}"
+          )
+          PY
+
+      # ================================================================
+      # GENERAL OUTPUT VALIDATION
+      # ================================================================
 
       - name: Validate generated subscriptions
         shell: bash
@@ -421,33 +1681,14 @@ jobs:
 
             ls -lh "$FILE"
 
-            python3 - "$FILE" <<'PY'
-          import sys
-          import yaml
-          from pathlib import Path
+            COUNT=$(
+              grep -cE \
+                '^[[:space:]]*-[[:space:]]*name:' \
+                "$FILE" \
+                || true
+            )
 
-          path = Path(sys.argv[1])
-
-          with path.open("r", encoding="utf-8") as f:
-              data = yaml.safe_load(f)
-
-          if not isinstance(data, dict):
-              raise SystemExit(
-                  f"❌ {path}: invalid YAML root."
-              )
-
-          if "proxies" not in data:
-              raise SystemExit(
-                  f"❌ {path}: missing proxies section."
-              )
-
-          if not isinstance(data["proxies"], list):
-              raise SystemExit(
-                  f"❌ {path}: proxies is not a list."
-              )
-
-          print(f"Proxy entries: {len(data['proxies'])}")
-          PY
+            echo "Proxy entries: $COUNT"
 
           done
 
@@ -462,373 +1703,64 @@ jobs:
             ./output/us.yaml \
             ./output/world.yaml
 
-      - name: Verify US and World classification
+      # ================================================================
+      # FINAL COUNT CHECK
+      # ================================================================
+
+      - name: Verify split counts
         shell: bash
         run: |
           set -eu
 
-          echo "========================================"
-          echo "STRICT US / WORLD VALIDATION"
-          echo "========================================"
-
-          python3 <<'PY'
-          import sys
-          import yaml
-          from pathlib import Path
-
-          ALL = Path("output/all.yaml")
-          SUBSCRIPTION = Path("output/subscription.yaml")
-          US = Path("output/us.yaml")
-          WORLD = Path("output/world.yaml")
-
-          US_MARKER = "🇺🇸US_"
-
-          # ------------------------------------------------------------
-          # Load YAML.
-          # ------------------------------------------------------------
-
-          def load_yaml(path):
-              with path.open("r", encoding="utf-8") as f:
-                  data = yaml.safe_load(f)
-
-              if not isinstance(data, dict):
-                  raise SystemExit(
-                      f"❌ {path}: YAML root is not a mapping."
-                  )
-
-              if "proxies" not in data:
-                  raise SystemExit(
-                      f"❌ {path}: missing proxies section."
-                  )
-
-              if not isinstance(data["proxies"], list):
-                  raise SystemExit(
-                      f"❌ {path}: proxies is not a list."
-                  )
-
-              return data
-
-          all_data = load_yaml(ALL)
-          us_data = load_yaml(US)
-          world_data = load_yaml(WORLD)
-
-          # ------------------------------------------------------------
-          # Extract and validate proxy names.
-          # ------------------------------------------------------------
-
-          def get_names(data, source):
-              names = []
-
-              for index, proxy in enumerate(
-                  data["proxies"],
-                  start=1,
-              ):
-
-                  if not isinstance(proxy, dict):
-                      raise SystemExit(
-                          f"❌ {source}: proxy #{index} is not a mapping."
-                      )
-
-                  name = proxy.get("name")
-
-                  if not isinstance(name, str):
-                      raise SystemExit(
-                          f"❌ {source}: proxy #{index} has no "
-                          "valid string name."
-                      )
-
-                  names.append(name)
-
-              return names
-
-          all_names = get_names(all_data, "all.yaml")
-          us_names = get_names(us_data, "us.yaml")
-          world_names = get_names(world_data, "world.yaml")
-
-          # ------------------------------------------------------------
-          # Detect duplicate names.
-          #
-          # Names are the identity used for classification validation.
-          # Duplicate names make exact membership validation ambiguous,
-          # so fail rather than silently accepting them.
-          # ------------------------------------------------------------
-
-          def duplicates(items):
-              seen = set()
-              result = []
-
-              for item in items:
-                  if item in seen and item not in result:
-                      result.append(item)
-
-                  seen.add(item)
-
-              return result
-
-          duplicate_all = duplicates(all_names)
-          duplicate_us = duplicates(us_names)
-          duplicate_world = duplicates(world_names)
-
-          if duplicate_all:
-              print("❌ Duplicate names found in all.yaml:")
-
-              for name in duplicate_all:
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          if duplicate_us:
-              print("❌ Duplicate names found in us.yaml:")
-
-              for name in duplicate_us:
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          if duplicate_world:
-              print("❌ Duplicate names found in world.yaml:")
-
-              for name in duplicate_world:
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          print("✅ No duplicate proxy names.")
-
-          # ------------------------------------------------------------
-          # Calculate the EXPECTED classification from all.yaml.
-          #
-          # This is critical:
-          #
-          # all.yaml is authoritative.
-          #
-          # We independently calculate which entries SHOULD be US and
-          # which SHOULD be World, then compare that against the actual
-          # generated files.
-          # ------------------------------------------------------------
-
-          expected_us = [
-              name
-              for name in all_names
-              if name.startswith(US_MARKER)
-          ]
-
-          expected_world = [
-              name
-              for name in all_names
-              if not name.startswith(US_MARKER)
-          ]
-
-          # ------------------------------------------------------------
-          # Basic counts.
-          # ------------------------------------------------------------
-
-          all_count = len(all_names)
-          us_count = len(us_names)
-          world_count = len(world_names)
-
-          print()
-          print("========================================")
-          print("COUNTS")
-          print("========================================")
-
-          print(f"All:              {all_count}")
-          print(f"US:               {us_count}")
-          print(f"World:            {world_count}")
-          print(f"US + World:       {us_count + world_count}")
-          print(f"Expected US:      {len(expected_us)}")
-          print(f"Expected World:   {len(expected_world)}")
-
-          if us_count + world_count != all_count:
-              print()
-              print("❌ FAIL: US + World != All")
-              sys.exit(1)
-
-          print()
-          print("✅ Count partition is complete.")
-
-          # ------------------------------------------------------------
-          # Exact US membership validation.
-          # ------------------------------------------------------------
-
-          expected_us_set = set(expected_us)
-          actual_us_set = set(us_names)
-
-          missing_us = expected_us_set - actual_us_set
-          unexpected_us = actual_us_set - expected_us_set
-
-          if missing_us:
-              print()
-              print("❌ FAIL: US proxies missing from us.yaml:")
-
-              for name in sorted(missing_us):
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          if unexpected_us:
-              print()
-              print("❌ FAIL: Non-US proxies found in us.yaml:")
-
-              for name in sorted(unexpected_us):
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          print("✅ us.yaml contains exactly the expected US proxies.")
-
-          # ------------------------------------------------------------
-          # Exact World membership validation.
-          # ------------------------------------------------------------
-
-          expected_world_set = set(expected_world)
-          actual_world_set = set(world_names)
-
-          missing_world = expected_world_set - actual_world_set
-          unexpected_world = actual_world_set - expected_world_set
-
-          if missing_world:
-              print()
-              print("❌ FAIL: World proxies missing from world.yaml:")
-
-              for name in sorted(missing_world):
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          if unexpected_world:
-              print()
-              print("❌ FAIL: US proxies found in world.yaml:")
-
-              for name in sorted(unexpected_world):
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          print(
-              "✅ world.yaml contains exactly the expected "
-              "non-US proxies."
+          ALL_COUNT=$(
+            grep -cE \
+              '^[[:space:]]*-[[:space:]]*name:' \
+              ./output/all.yaml \
+              || true
           )
 
-          # ------------------------------------------------------------
-          # Explicit contamination checks.
-          # ------------------------------------------------------------
-
-          us_in_world = [
-              name
-              for name in world_names
-              if name.startswith(US_MARKER)
-          ]
-
-          non_us_in_us = [
-              name
-              for name in us_names
-              if not name.startswith(US_MARKER)
-          ]
-
-          if us_in_world:
-              print()
-              print("❌ FAIL: US proxies leaked into world.yaml:")
-
-              for name in us_in_world:
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          if non_us_in_us:
-              print()
-              print("❌ FAIL: Non-US proxies leaked into us.yaml:")
-
-              for name in non_us_in_us:
-                  print(f"  {name}")
-
-              sys.exit(1)
-
-          print("✅ No US → World contamination.")
-          print("✅ No World → US contamination.")
-
-          # ------------------------------------------------------------
-          # Verify that US and World together reconstruct all.yaml's
-          # proxy membership exactly.
-          # ------------------------------------------------------------
-
-          if set(us_names) | set(world_names) != set(all_names):
-              print()
-              print(
-                  "❌ FAIL: US + World do not reconstruct "
-                  "all.yaml."
-              )
-
-              sys.exit(1)
-
-          if set(us_names) & set(world_names):
-              print()
-              print(
-                  "❌ FAIL: At least one proxy exists in BOTH "
-                  "us.yaml and world.yaml."
-              )
-
-              sys.exit(1)
-
-          print("✅ US + World reconstruct all.yaml exactly.")
-
-          # ------------------------------------------------------------
-          # Verify subscription.yaml remains an exact copy of all.yaml.
-          #
-          # This workflow must not modify the authoritative general
-          # subscription.
-          # ------------------------------------------------------------
-
-          all_bytes = ALL.read_bytes()
-          subscription_bytes = SUBSCRIPTION.read_bytes()
-
-          if all_bytes != subscription_bytes:
-              print()
-              print(
-                  "❌ FAIL: subscription.yaml is not an exact "
-                  "byte-for-byte copy of all.yaml."
-              )
-
-              sys.exit(1)
-
-          print(
-              "✅ subscription.yaml is byte-for-byte "
-              "identical to all.yaml."
+          US_COUNT=$(
+            grep -cE \
+              '^[[:space:]]*-[[:space:]]*name:' \
+              ./output/us.yaml \
+              || true
           )
 
-          # ------------------------------------------------------------
-          # Final result.
-          # ------------------------------------------------------------
+          WORLD_COUNT=$(
+            grep -cE \
+              '^[[:space:]]*-[[:space:]]*name:' \
+              ./output/world.yaml \
+              || true
+          )
 
-          print()
-          print("========================================")
-          print("STRICT VALIDATION PASSED")
-          print("========================================")
+          echo "========================================"
+          echo "SPLIT COUNT CHECK"
+          echo "========================================"
 
-          print(f"Total proxies: {all_count}")
-          print(f"US proxies:    {us_count}")
-          print(f"World proxies: {world_count}")
+          echo "All:   $ALL_COUNT"
+          echo "US:    $US_COUNT"
+          echo "World: $WORLD_COUNT"
 
-          print()
-          print("Classification marker:")
-          print(f"  {US_MARKER}")
+          echo
+          echo "US + World:"
+          echo "$((US_COUNT + WORLD_COUNT))"
 
-          print()
-          print("All checks passed:")
-          print("  ✅ US + World = All")
-          print("  ✅ Every expected US proxy is in us.yaml")
-          print("  ✅ No US proxy is in world.yaml")
-          print("  ✅ Every expected World proxy is in world.yaml")
-          print("  ✅ No World proxy is in us.yaml")
-          print("  ✅ No duplicate proxy names")
-          print("  ✅ US and World are mutually exclusive")
-          print("  ✅ US + World reconstruct all.yaml")
-          print("  ✅ subscription.yaml == all.yaml")
+          if [
+            "$((US_COUNT + WORLD_COUNT))"
+            -ne
+            "$ALL_COUNT"
+          ]; then
 
-          print()
-          print("🎉 US / World split is verified correct.")
+            echo "❌ SPLIT COUNT MISMATCH"
 
-          PY
+            exit 1
+          fi
+
+          echo "✅ Split count verified."
+
+      # ================================================================
+      # UPLOAD ARTIFACT
+      # ================================================================
 
       - name: Upload generated subscriptions
         if: always()
@@ -843,6 +1775,10 @@ jobs:
             subs-check.log
           if-no-files-found: warn
           retention-days: 7
+
+      # ================================================================
+      # COMMIT AND PUSH
+      # ================================================================
 
       - name: Commit and push output
         shell: bash
@@ -859,10 +1795,12 @@ jobs:
             output/us.yaml \
             output/world.yaml
           do
+
             if [ ! -s "$FILE" ]; then
               echo "❌ Missing or empty: $FILE"
               exit 1
             fi
+
           done
 
           echo "Generated files:"
@@ -882,8 +1820,10 @@ jobs:
           git add -f output/world.yaml
 
           if git diff --cached --quiet; then
+
             echo
             echo "ℹ️ No output changes to commit."
+
             exit 0
           fi
 
@@ -892,21 +1832,32 @@ jobs:
 
           git diff --cached --stat
 
-          git commit -m "Auto-update filtered subscriptions"
+          git commit \
+            -m "Auto-update filtered subscriptions"
 
-          # Pull latest remote changes to avoid push rejection
+          # Pull latest remote changes to avoid push rejection.
           echo
           echo "Pulling latest remote changes..."
 
-          git pull --rebase origin ${GITHUB_REF_NAME} || {
-            echo "⚠️ Rebase failed. Trying to merge with strategy 'ours'."
+          git pull \
+            --rebase \
+            origin \
+            ${GITHUB_REF_NAME} \
+            || {
 
-            git pull origin ${GITHUB_REF_NAME} \
-              --no-rebase \
-              --strategy-option=ours
-          }
+              echo "⚠️ Rebase failed."
+              echo "Trying to merge with strategy 'ours'."
 
-          git push origin HEAD:${GITHUB_REF_NAME}
+              git pull \
+                origin \
+                ${GITHUB_REF_NAME} \
+                --no-rebase \
+                --strategy-option=ours
+            }
+
+          git push \
+            origin \
+            HEAD:${GITHUB_REF_NAME}
 
           echo
           echo "✅ Push completed."
