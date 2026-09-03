@@ -16,7 +16,7 @@ jobs:
   filter:
     name: Build filtered subscriptions
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 180
 
     steps:
       # ============================================================
@@ -160,7 +160,7 @@ jobs:
 
           trap cleanup EXIT
 
-          MAX_WAIT=3600
+          MAX_WAIT=12600
           ELAPSED=0
 
           echo
