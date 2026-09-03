@@ -101,6 +101,7 @@ dns:
 
 sub-urls-remote: 
   - "https://raw.githubusercontent.com/beck-8/sub-urls/refs/heads/main/%E5%B0%8F%E8%80%8C%E7%BE%8E.txt"
+  - "https://raw.githubusercontent.com/mehdirzfx/v2ray-sub/refs/heads/main/README.md"
 
 sub-urls:
   - "https://shadowmere.xyz/api/b64sub/"
