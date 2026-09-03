@@ -1,8 +1,8 @@
 print-progress: true
 
-concurrent: 100
-media-concurrent: 50
-speed-concurrent: 40
+concurrent: 200
+media-concurrent: 100
+speed-concurrent: 80
 shuffle-test-order: true
 
 check-interval: 120
@@ -90,7 +90,7 @@ success-rate: 0
 ipv6: false
 
 dns:
-  enable: false
+  enable: true
   proxy-server-nameserver:
     - "https://dns.quad9.net/dns-query"
   nameserver:
