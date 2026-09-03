@@ -1,9 +1,17 @@
 proxies:
+- cipher: aes-128-gcm
+  name: 🇨🇦CA_1|727KB/s|83%|YT-CA|GPT⁺-CA
+  password: shadowsocks
+  port: '443'
+  server: 149.22.95.183
+  type: ss
+  udp: true
 - client-fingerprint: chrome
-  name: 🇨🇦CA_10|803KB/s|YT-CN
+  encryption: none
+  name: 🇨🇦CA_12|807KB/s|YT-US
   network: ws
   port: '2087'
-  server: 104.16.150.7
+  server: 104.16.150.130
   servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
@@ -12,13 +20,31 @@ proxies:
   ws-opts:
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/70.0.3538.102 Safari/537.36
+      User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; WAS-LX3 Build/HUAWEIWAS-LX3)
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
     path: /
   xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_11|2.8MB/s|YT-CN|GPT⁺-KR|CL-KR
+  name: 🇨🇦CA_13|3.4MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 104.16.150.246
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; WAS-LX3 Build/HUAWEIWAS-LX3)
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_14|919KB/s|24%|YT-US|GPT⁺-KR
   network: ws
   port: '2087'
   server: 104.16.151.21
@@ -31,357 +57,15 @@ proxies:
     early-data-header-name: Sec-WebSocket-Protocol
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/41.0.2272.101 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/51.0.2704.103 Safari/537.36
     max-early-data: 2560
     path: /
   xudp: true
-- name: 🇨🇦CA_12|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_15|4.7MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2052'
   server: 104.18.34.14
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/57.0.2987.133 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_13|4.2MB/s|24%|YT-CN|GPT⁺-US|CL-US
-  network: ws
-  port: '2082'
-  server: 104.18.34.14
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/56.0.2924.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_14|3.6MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 104.18.34.14
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.101 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_15|4.2MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 104.18.34.14
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/64.0.3282.167 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_16|748KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 104.18.34.14
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.17
-        (KHTML, like Gecko) Chrome/10.0.649.0 Safari/534.17
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_17|3.5MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 104.18.34.14
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/45.0.2454.85 Safari/537.36
-    path: /?ed=2560security=tls
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_18|2.2MB/s|YT-CN|GPT⁺
-  network: ws
-  port: '2087'
-  server: 104.18.38.47
-  servername: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/57.0.2987.133 Safari/537.36
-    max-early-data: 2560
-    path: /
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_19|751KB/s|YT-CN
-  network: ws
-  port: '2087'
-  server: 104.18.38.47
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.77 Safari/537.36
-    path: /
-  xudp: true
-- encryption: none
-  name: 🇨🇦CA_20|1.4MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 104.18.39.218
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/41.0.2272.101 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_21|4.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 104.18.39.218
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/57.0.2987.133 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_22|4.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 104.18.39.218
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532M Build/MMB29T) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_23|3.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 104.18.39.218
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/45.0.2454.85 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_24|776KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 104.18.39.218
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0; vivo 1610 Build/MMB29M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_25|3.1MB/s|24%|YT-CN|GPT⁺-KR|CL-VN
-  network: ws
-  port: '2087'
-  server: 104.18.40.152
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/68.0.3440.106 Safari/537.36
-    max-early-data: 2560
-    path: /
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_26|4.8MB/s|24%|YT-CN|GPT-KR|CL-VN
-  network: ws
-  port: '2087'
-  server: 104.18.42.163
-  servername: fx3h2kf8xn.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: fx3h2kf8xn.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; Redmi Note 4 Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36
-    max-early-data: 2560
-    path: /
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_27|839KB/s|YT-CN
-  network: ws
-  port: '2087'
-  server: 104.18.42.163
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/55.0.2883.87 Safari/537.36
-    path: /
-  xudp: true
-- name: 🇨🇦CA_28|4.2MB/s|24%|YT-CN|GPT⁺-US|CL-US
-  network: ws
-  port: '80'
-  server: 104.18.46.234
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/49.0.2623.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_29|2.2MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 104.18.46.234
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/54.0.2840.71 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_30|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 104.18.46.234
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.90 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_31|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 104.18.46.234
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/44.0.2403.157 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_32|3.5MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 104.18.46.234
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/45.0.2454.85 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_33|5.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 104.18.46.46
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/67.0.3396.99 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_34|814KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 104.18.46.46
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -392,519 +76,10 @@ proxies:
         Gecko) Chrome/47.0.2526.111 Safari/537.36 MVisionPlayer/1.0.0.0
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_35|4.9MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 104.18.46.46
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.113 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_36|5.0MB/s|24%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '8080'
-  server: 104.18.46.46
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/47.0.2526.111 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_37|2.0MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 104.18.46.46
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/50.0.2661.102 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_38|3.7MB/s|24%|YT-US|GPT⁺-US|GM-US
-  network: ws
-  port: '80'
-  server: 104.18.47.113
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_39|2.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 104.18.47.113
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/69.0.3497.100 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_40|898KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_16|6.2MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2082'
-  server: 104.18.47.113
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_41|5.0MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 104.18.47.113
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0; CAM-L03 Build/HUAWEICAM-L03) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_42|5.0MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 104.18.47.113
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/68.0.3440.106 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_43|3.3MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 104.18.47.113
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/56.0.2924.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_44|1.3MB/s|24%|YT-CN|GPT⁺|CL-VN
-  network: ws
-  port: '2087'
-  server: 104.19.214.146
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; vivo 1603 Build/MMB29M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/58.0.3029.83 Mobile Safari/537.36
-    max-early-data: 2560
-    path: /
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_45|853KB/s|YT-CN
-  network: ws
-  port: '2087'
-  server: 104.19.214.98
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/55.0.2883.87 Safari/537.36
-    path: /?TELEGRAM-MARAMBASHI_MARAMBASHI?ed=512
-  xudp: true
-- client-fingerprint: chrome
-  name: 🇨🇦CA_46|4.0MB/s|YT-CN
-  network: ws
-  port: '2087'
-  server: 104.19.215.97
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.0; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/51.0.2704.106 Safari/537.36
-    path: /
-  xudp: true
-- name: 🇨🇦CA_47|4.9MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 104.21.70.21
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/533.2 (KHTML,
-        like Gecko) Chrome/5.0.342.1 Safari/533.2
-    path: /?ed=2560
-  xudp: true
-- name: 🇨🇦CA_67|2.7MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 162.159.0.169
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/56.0.2924.87 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_68|3.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 162.159.0.169
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/49.0.2623.112 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_69|4.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 162.159.0.169
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532M Build/MMB29T; wv) AppleWebKit/537.36
-        (KHTML, like Gecko) Version/4.0 Chrome/55.0.2883.91 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_70|4.1MB/s|0%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 162.159.0.169
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.110 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_71|3.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 162.159.0.169
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.102 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_72|4.6MB/s|0%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 162.159.0.169
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/68.0.3440.75 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_73|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 162.159.0.53
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/56.0.2924.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_74|2.5MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 162.159.0.53
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/35.0.1916.153 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_75|3.9MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 162.159.0.53
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/49.0.2623.110 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_76|4.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 162.159.0.53
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/41.0.2272.76 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_77|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 162.159.0.53
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0; CAM-L21 Build/HUAWEICAM-L21; wv)
-        AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile
-        Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_78|743KB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 162.159.0.53
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/41.0.2228.0 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_79|4.9MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 162.159.24.131
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/66.0.3359.139 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_80|3.3MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 162.159.24.131
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/62.0.3202.94 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_81|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 162.159.24.131
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/55.0.2883.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- encryption: none
-  name: 🇨🇦CA_82|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 162.159.24.131
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/48.0.2564.109 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_83|2.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 162.159.24.131
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-J700M Build/MMB29K) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_84|2.3MB/s|24%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '8080'
-  server: 162.159.24.131
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/41.0.2272.101 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_85|854KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 162.159.24.131
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/57.0.2987.133 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_96|890KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 162.159.43.187
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G610M Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_97|4.7MB/s|24%|YT-US|GPT-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 162.159.43.187
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/55.0.2883.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_98|4.9MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 162.159.43.187
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  server: 104.18.34.14
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -915,68 +90,10 @@ proxies:
         like Gecko) Chrome/65.0.3325.181 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_99|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 162.159.43.187
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0; vivo 1606 Build/MMB29M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_100|3.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 162.159.43.187
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.102 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_104|4.5MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 162.159.48.32
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/62.0.3202.89 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_105|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 162.159.48.32
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/54.0.2840.99 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_106|3.0MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_17|4.8MB/s|24%|YT-US|GPT⁺-FR
   network: ws
   port: '2086'
-  server: 162.159.48.32
+  server: 104.18.34.14
   servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
@@ -984,99 +101,59 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/54.0.2840.99 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/51.0.2704.106 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_107|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_18|6.5MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2095'
-  server: 162.159.48.32
+  server: 104.18.34.14
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.77 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_108|4.1MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 162.159.48.32
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G570M) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.80 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- encryption: none
-  name: 🇨🇦CA_109|4.6MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 162.159.48.32
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0; MYA-L22 Build/HUAWEIMYA-L22) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_131|4.4MB/s|24%|YT-CN|GPT⁺|CL-KR
-  network: ws
-  port: '2087'
-  server: 172.64.145.166
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/69.0.3497.100 Safari/537.36
-    max-early-data: 2560
-    path: /
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_132|4.6MB/s|YT-CN|GPT⁺-VN
-  network: ws
-  port: '2087'
-  server: 172.64.145.202
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
       User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
         Gecko) Chrome/49.0.2623.110 Safari/537.36
-    max-early-data: 2560
-    path: /
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_19|1.1MB/s|24%|YT-US|GPT⁺
+  network: ws
+  port: '8080'
+  server: 104.18.34.14
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/62.0.3202.94 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_20|841KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 104.18.34.14
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
+    path: /?ed=2560security=tls
   xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_133|828KB/s|YT-CN
+  name: 🇨🇦CA_21|4.3MB/s|YT-US
   network: ws
   port: '2087'
-  server: 172.64.145.93
+  server: 104.18.38.47
   servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
@@ -1085,33 +162,108 @@ proxies:
   ws-opts:
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; SM-J120M Build/LMY47X) AppleWebKit/537.36
+      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G570M) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.80 Mobile Safari/537.36
+    path: /
+  xudp: true
+- encryption: none
+  name: 🇨🇦CA_22|6.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 104.18.39.218
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_23|4.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 104.18.39.218
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/63.0.3239.132 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_24|7.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 104.18.39.218
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 7.1; vivo 1716 Build/N2G47H) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/61.0.3163.98 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_25|5.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 104.18.39.218
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko)
+        Slackware/Chrome/12.0.742.100 Safari/534.30
+    path: /?ed=2560security=tls
+  xudp: true
+- client-fingerprint: chrome
+  name: 🇨🇦CA_26|4.2MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 104.18.40.152
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_27|3.6MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 104.18.42.163
+  servername: fx3h2kf8xn.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: fx3h2kf8xn.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-J700M Build/MMB29K) AppleWebKit/537.36
         (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
     path: /
   xudp: true
 - client-fingerprint: chrome
-  name: 🇨🇦CA_134|832KB/s|YT-CN
-  network: ws
-  port: '2087'
-  server: 172.64.146.211
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G610F Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36
-    path: /
-  xudp: true
-- client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_135|4.0MB/s|YT-CN
+  name: 🇨🇦CA_28|5.4MB/s|YT-US
   network: ws
   port: '2087'
-  server: 172.64.147.104
+  server: 104.18.42.163
   servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
@@ -1120,389 +272,14 @@ proxies:
   ws-opts:
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532M Build/MMB29T) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/45.0.2454.93 Safari/537.36
     path: /
   xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_136|3.2MB/s|YT-CN
-  network: ws
-  port: '2087'
-  server: 172.64.149.209
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/51.0.2704.106 Safari/537.36
-    path: /
-  xudp: true
-- encryption: none
-  name: 🇨🇦CA_137|3.6MB/s|0%|YT-US|GPT-SG|CL-SG|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.150.28
-  servername: hhlfy.twiladaphne.ndjp.net
-  type: vless
-  udp: true
-  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
-  ws-opts:
-    headers:
-      Host: hhlfy.twiladaphne.ndjp.net
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/69.0.3497.100 Safari/537.36
-    path: /fp
-  xudp: true
-- name: 🇨🇦CA_138|3.0MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.154.8
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/49.0.2623.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_139|710KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.154.8
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/49.0.2623.110 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_140|700KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 172.64.154.8
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.90 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_141|3.2MB/s|0%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '2095'
-  server: 172.64.154.8
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/41.0.2272.101 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_142|797KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 172.64.154.8
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.110 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_143|872KB/s|0%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '8880'
-  server: 172.64.154.8
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/49.0.2623.110 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_144|2.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.158.146
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; Redmi Note 4 Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_145|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.158.146
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.67 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_146|884KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 172.64.158.146
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/56.0.2924.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_147|2.2MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 172.64.158.146
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like
-        Gecko) Chrome/26.0.1410.64 Safari/537.31
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_148|3.3MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 172.64.158.146
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/54.0.2840.71 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_149|4.2MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.229.170
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/54.0.2840.71 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_150|3.5MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.229.170
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/59.0.3071.115 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_151|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 172.64.229.170
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/51.0.2704.106 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_152|3.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_29|3.7MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '80'
-  server: 172.64.229.2
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G610M) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.80 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_153|4.6MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.229.2
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/49.0.2623.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_154|4.6MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.229.2
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.102 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_155|3.3MB/s|24%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '2086'
-  server: 172.64.229.2
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/62.0.3202.89 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_156|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 172.64.229.2
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/66.0.3359.139 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_157|3.6MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.32.103
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; BLL-L22 Build/HUAWEIBLL-L22) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_158|4.4MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 172.64.32.103
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/51.0.2704.106 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_159|1.1MB/s|24%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '80'
-  server: 172.64.32.108
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/54.0.2840.71 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_160|4.1MB/s|24%|YT-US|GPT⁺-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.32.108
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/65.0.3325.162 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_161|773KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 172.64.32.108
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  server: 104.18.46.234
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -1514,10 +291,10 @@ proxies:
         Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_162|4.0MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_30|766KB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '8880'
-  server: 172.64.32.108
+  port: '2052'
+  server: 104.18.46.234
   servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
@@ -1525,14 +302,634 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/52.0.2743.116 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/66.0.3359.181 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_163|4.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_31|3.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 104.18.46.234
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/46.0.2490.80 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_32|5.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 104.18.46.234
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (X11; U; Linux i586; en-US) AppleWebKit/533.2 (KHTML,
+        like Gecko) Chrome/5.0.342.1 Safari/533.2
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_33|5.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 104.18.46.234
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/62.0.3202.94 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_34|865KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 104.18.46.234
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/46.0.2490.80 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_35|923KB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '80'
-  server: 172.64.42.85
+  server: 104.18.46.46
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/49.0.2623.110 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_36|849KB/s|24%|YT-US|GPT-FR
+  network: ws
+  port: '2082'
+  server: 104.18.46.46
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 5.1; A37f Build/LMY47V) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/43.0.2357.93 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_37|3.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 104.18.46.46
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/56.0.2924.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_38|6.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 104.18.46.46
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_39|4.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 104.18.46.46
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/70.0.3538.77 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_40|4.8MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '80'
+  server: 104.18.47.113
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/47.0.2526.111 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_41|5.0MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2052'
+  server: 104.18.47.113
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi 4A Build/MMB29M; wv) AppleWebKit/537.36
+        (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.116 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_42|5.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 104.18.47.113
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.77 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_43|4.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 104.18.47.113
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_44|3.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 104.18.47.113
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/46.0.2490.86 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_45|5.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 104.18.47.113
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; A37fw Build/LMY47V) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_46|6.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 104.18.47.113
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-J700M Build/MMB29K) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- client-fingerprint: chrome
+  name: 🇨🇦CA_47|4.7MB/s|YT-US
+  network: ws
+  port: '443'
+  server: 104.19.214.97
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_48|4.2MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 104.19.214.98
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/63.0.3239.132 Safari/537.36
+    path: /?TELEGRAM-MARAMBASHI_MARAMBASHI?ed=512
+  xudp: true
+- name: 🇨🇦CA_49|877KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 104.21.70.21
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.0) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/49.0.2623.112 Safari/537.36
+    path: /?ed=2560
+  xudp: true
+- name: 🇨🇦CA_79|5.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 162.159.0.169
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/40.0.2214.115 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_80|4.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 162.159.0.169
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/70.0.3538.102 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_81|5.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.0.169
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/40.0.2214.111 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_82|6.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 162.159.0.169
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; WAS-LX3 Build/HUAWEIWAS-LX3)
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_83|5.9MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '8080'
+  server: 162.159.0.169
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_84|5.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 162.159.0.169
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/32.0.1700.107 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_85|5.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 162.159.0.53
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/59.0.3071.115 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_86|6.7MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2052'
+  server: 162.159.0.53
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 7.0; Moto C Build/NRD90M.059) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_87|4.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 162.159.0.53
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_88|5.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.0.53
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/58.0.3029.81 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_89|2.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 162.159.0.53
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/65.0.3325.181 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_90|6.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 162.159.0.53
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/63.0.3239.84 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_91|3.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 162.159.0.53
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/50.0.2661.102 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_92|1.1MB/s|24%|YT-US|GPT⁺
+  network: ws
+  port: '80'
+  server: 162.159.24.131
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/32.0.1700.107 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_93|889KB/s|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 162.159.24.131
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/46.0.2490.71 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_94|5.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 162.159.24.131
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Unknown; Linux) AppleWebKit/538.1 (KHTML, like Gecko)
+        Chrome/v1.0.0 Safari/538.1
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_95|5.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.24.131
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; CPH1607 Build/MMB29M; wv) AppleWebKit/537.36
+        (KHTML, like Gecko) Version/4.0 Chrome/63.0.3239.111 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_96|5.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 162.159.24.131
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 5.1; A37f Build/LMY47V) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/43.0.2357.93 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_97|6.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 162.159.24.131
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko)
+        Slackware/Chrome/12.0.742.100 Safari/534.30
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_98|6.6MB/s|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 162.159.24.131
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/56.0.2924.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_109|5.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 162.159.43.187
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/46.0.2490.71 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_110|6.2MB/s|0%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 162.159.43.187
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-J500M Build/MMB29M) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_111|3.8MB/s|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.43.187
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_112|6.1MB/s|0%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 162.159.43.187
   servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
@@ -1541,13 +938,431 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.113 Safari/537.36
+        like Gecko) Chrome/69.0.3497.100 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_164|4.2MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_113|6.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 162.159.43.187
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/65.0.3325.181 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_115|820KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 162.159.48.32
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_116|5.2MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2052'
-  server: 172.64.42.85
+  server: 162.159.48.32
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/70.0.3538.67 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_117|898KB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '2086'
+  server: 162.159.48.32
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_118|5.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 162.159.48.32
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/65.0.3325.162 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_119|6.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 162.159.48.32
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532M Build/MMB29T) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_120|5.2MB/s|24%|YT-US
+  network: ws
+  port: '8880'
+  server: 162.159.48.32
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/41.0.2272.76 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_142|4.8MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.145.166
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.77 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_143|4.8MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.145.202
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_144|5.6MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.145.93
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/41.0.2272.104 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  name: 🇨🇦CA_145|5.0MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.146.211
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/35.0.1916.153 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_146|5.5MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.147.104
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/66.0.3359.117 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_147|4.9MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.149.209
+  servername: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/62.0.3202.94 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_148|3.3MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.149.209
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/58.0.3029.110 Safari/537.36
+    path: /
+  xudp: true
+- encryption: none
+  name: 🇨🇦CA_149|926KB/s|YT-US|GPT-SG
+  network: ws
+  port: '2082'
+  server: 172.64.150.28
+  type: vless
+  udp: true
+  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
+  ws-opts:
+    headers:
+      Host: hhlfy.twiladaphne.ndjp.net
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/41.0.2272.76 Safari/537.36
+    path: /fp
+  xudp: true
+- name: 🇨🇦CA_150|3.4MB/s|0%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.154.8
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/34.0.1847.131 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_151|6.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.154.8
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.102 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_152|3.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.154.8
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-J500M Build/MMB29M) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_153|7.2MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2095'
+  server: 172.64.154.8
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_154|1.8MB/s|24%|YT-US|GPT⁺
+  network: ws
+  port: '8080'
+  server: 172.64.154.8
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_155|807KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.154.8
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; vivo 1603 Build/MMB29M) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/58.0.3029.83 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_156|4.5MB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '80'
+  server: 172.64.158.146
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/67.0.3396.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_157|2.9MB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '2052'
+  server: 172.64.158.146
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_158|6.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.158.146
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.110 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_159|5.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 172.64.158.146
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/46.0.2490.80 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_160|5.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 172.64.158.146
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; CPH1607 Build/MMB29M; wv) AppleWebKit/537.36
+        (KHTML, like Gecko) Version/4.0 Chrome/63.0.3239.111 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_161|5.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.158.146
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/49.0.2623.112 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_162|796KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 172.64.229.170
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -1559,7 +1374,320 @@ proxies:
         Mobile Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_165|798KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_163|1.3MB/s|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.229.170
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; A37fw Build/LMY47V) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_164|4.9MB/s|24%|YT-US|GPT⁺
+  network: ws
+  port: '2082'
+  server: 172.64.229.170
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/65.0.3325.181 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_165|6.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.229.170
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/67.0.3396.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_166|4.7MB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '8080'
+  server: 172.64.229.170
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/70.0.3538.102 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_167|5.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.229.170
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/56.0.2924.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_168|5.0MB/s|YT-US|GPT-US
+  network: ws
+  port: '80'
+  server: 172.64.229.2
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-J500M Build/MMB29M) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_169|5.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.229.2
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.67 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_170|6.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.229.2
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/50.0.2661.102 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_171|5.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.229.2
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 5.1.1; SM-J120M Build/LMY47X) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_172|5.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.229.2
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 7.1.2; Redmi Note 5A Build/N2G47H; wv)
+        AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/63.0.3239.111 Mobile
+        Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_173|4.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.32.103
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/48.0.2564.109 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_174|5.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.32.103
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 5.1; HUAWEI CUN-L22 Build/HUAWEICUN-L22;
+        wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84
+        Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_175|5.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.32.103
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_176|5.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 172.64.32.103
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/70.0.3538.102 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_177|5.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.32.103
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/47.0.2526.111 Safari/537.36 MVisionPlayer/1.0.0.0
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_178|6.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 172.64.32.108
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/49.0.2623.110 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_179|5.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.32.108
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; WAS-LX3 Build/HUAWEIWAS-LX3)
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_180|911KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 172.64.32.108
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/50.0.2661.102 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_181|4.6MB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '8880'
+  server: 172.64.32.108
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/69.0.3497.100 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_182|4.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 172.64.42.85
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 4.4.2; de-de; SAMSUNG GT-I9195 Build/KOT49H)
+        AppleWebKit/537.36 (KHTML, like Gecko) Version/1.5 Chrome/28.0.1500.94 Mobile
+        Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_183|6.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.42.85
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/46.0.2490.80 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_184|3.5MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2082'
   server: 172.64.42.85
@@ -1570,11 +1698,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.102 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/47.0.2526.106 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_166|4.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_185|4.6MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2086'
   server: 172.64.42.85
@@ -1585,11 +1713,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/66.0.3359.117 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/46.0.2490.86 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_167|4.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_186|5.2MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2095'
   server: 172.64.42.85
@@ -1600,11 +1728,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/55.0.2883.87 Safari/537.36
+      User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/533.2 (KHTML,
+        like Gecko) Chrome/5.0.342.1 Safari/533.2
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_168|3.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_187|2.2MB/s|24%|YT-US|GPT⁺
   network: ws
   port: '8080'
   server: 172.64.42.85
@@ -1615,11 +1743,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/58.0.3029.110 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/59.0.3071.115 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_169|2.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_188|6.0MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '8880'
   server: 172.64.42.85
@@ -1629,13 +1757,13 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-J730GM Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/46.0.2490.80 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_170|3.9MB/s|24%|YT-CN
+  name: 🇨🇦CA_189|3.9MB/s|0%|YT-CN|GPT-KR
   network: ws
   port: '2087'
   server: 172.64.52.175
@@ -1648,14 +1776,14 @@ proxies:
     early-data-header-name: Sec-WebSocket-Protocol
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/70.0.3538.77 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like
+        Gecko) Chrome/26.0.1410.64 Safari/537.31
     max-early-data: 2560
     path: /
   xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_171|1.5MB/s|YT-CN|GPT⁺-KR|CL-KR
+  name: 🇨🇦CA_190|1.3MB/s|YT-CN|GPT⁺
   network: ws
   port: '2087'
   server: 172.64.52.230
@@ -1668,85 +1796,15 @@ proxies:
     early-data-header-name: Sec-WebSocket-Protocol
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.110 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.102 Safari/537.36
     max-early-data: 2560
     path: /
   xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_172|4.8MB/s|24%|YT-CN|GPT⁺-KR|CL-KR
-  network: ws
-  port: '2087'
-  server: 172.64.52.24
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/45.0.2454.101 Safari/537.36
-    max-early-data: 2560
-    path: /
-  xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_173|2.2MB/s|YT-CN|GPT⁺-VN
-  network: ws
-  port: '2087'
-  server: 172.64.52.30
-  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-  tls: true
-  type: vless
-  udp: true
-  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.90 Safari/537.36
-    max-early-data: 2560
-    path: /
-  xudp: true
-- name: 🇨🇦CA_174|3.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_191|4.3MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '80'
   server: 172.64.52.6
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/533.4
-        (KHTML, like Gecko) Chrome/5.0.375.99 Safari/533.4
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_175|773KB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.52.6
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.90 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_176|4.2MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.52.6
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -1754,12 +1812,12 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/57.0.2987.133 Safari/537.36
+        Gecko) Chrome/70.0.3538.102 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_177|4.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_192|855KB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '8080'
+  port: '2082'
   server: 172.64.52.6
   type: vless
   udp: true
@@ -1767,11 +1825,41 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.77 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- encryption: none
+  name: 🇨🇦CA_193|3.4MB/s|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 172.64.52.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/64.0.3282.186 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_194|3.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 172.64.52.6
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
         like Gecko) Chrome/60.0.3112.113 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_178|3.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_195|864KB/s|0%|YT-CN|GPT⁺-US
   network: ws
   port: '8880'
   server: 172.64.52.6
@@ -1782,32 +1870,49 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.102 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.110 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_179|916KB/s|YT-CN|GPT-KR|CL-KR
+  name: 🇨🇦CA_196|3.8MB/s|YT-CN
   network: ws
-  port: '2087'
-  server: 172.64.52.68
+  port: '443'
+  server: 172.64.52.97
   servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
   udp: true
   uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
   ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/43.0.2357.65 Safari/537.36
-    max-early-data: 2560
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.67 Safari/537.36
     path: /
   xudp: true
 - client-fingerprint: chrome
-  name: 🇨🇦CA_180|3.8MB/s|YT-CN
+  encryption: none
+  name: 🇨🇦CA_197|868KB/s|YT-CN
+  network: ws
+  port: '2096'
+  server: 172.64.52.97
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_198|1.3MB/s|YT-CN|GPT-KR
   network: ws
   port: '2087'
   server: 172.64.53.194
@@ -1817,13 +1922,32 @@ proxies:
   udp: true
   uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
   ws-opts:
+    early-data-header-name: Sec-WebSocket-Protocol
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/51.0.2704.106 Safari/537.36
+    max-early-data: 2560
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  name: 🇨🇦CA_199|3.2MB/s|YT-CN
+  network: ws
+  port: '2087'
+  server: 172.64.53.215
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
       User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/57.0.2987.133 Safari/537.36
+        Gecko) Chrome/49.0.2623.112 Safari/537.36
     path: /
   xudp: true
-- name: 🇨🇦CA_181|3.5MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_200|1.1MB/s|24%|YT-US|GPT⁺
   network: ws
   port: '80'
   server: 172.64.53.55
@@ -1833,10 +1957,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Unknown; Linux) AppleWebKit/538.1 (KHTML, like Gecko)
-        Chrome/v1.0.0 Safari/538.1
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.67 Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_182|3.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+  xudp: true
+- name: 🇨🇦CA_201|4.6MB/s|YT-US|GPT⁺-US
   network: ws
   port: '2052'
   server: 172.64.53.55
@@ -1846,11 +1971,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/70.0.3538.67 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/41.0.2228.0 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_183|713KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_202|3.1MB/s|24%|YT-US|GPT⁺
   network: ws
   port: '2095'
   server: 172.64.53.55
@@ -1861,31 +1986,16 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/68.0.3440.106 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/45.0.2454.85 Safari/537.36
     path: /?ed=2560security=tls
-  xudp: true
-- encryption: none
-  name: 🇨🇦CA_188|1.4MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 188.114.97.6
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0; vivo 1713 Build/MRA58K) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36
-    path: /?ed=2560
   xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_298|888KB/s|24%|YT-CN|GPT⁺-KR|CL-VN
+  name: 🇨🇦CA_203|977KB/s|24%|YT-CN|GPT-KR
   network: ws
   port: '2087'
-  server: cf.9999669.xyz
+  server: 172.64.53.74
   servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
@@ -1895,14 +2005,121 @@ proxies:
     early-data-header-name: Sec-WebSocket-Protocol
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/54.0.2840.71 Safari/537.36
+    max-early-data: 2560
+    path: /
+  xudp: true
+- client-fingerprint: unsafe
+  encryption: none
+  name: 🇨🇦CA_204|784KB/s|0%|YT-US|GPT⁺-DE
+  network: ws
+  port: '443'
+  server: 172.67.217.240
+  servername: web-socket.tgdaosheng.ggff.net
+  tls: true
+  type: vless
+  udp: true
+  uuid: 9b18ccef-b9e0-41d1-8990-9d970569e142
+  ws-opts:
+    headers:
+      Host: web-socket.tgdaosheng.ggff.net
+      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /proxyip=bpb.yousef.isegaro.com
+  xudp: true
+- name: 🇨🇦CA_208|4.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 188.114.97.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/58.0.3029.81 Safari/537.36
+    path: /
+  xudp: true
+- name: 🇨🇦CA_209|894KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 188.114.97.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/62.0.3202.94 Safari/537.36
+    path: /?ed=2560
+  xudp: true
+- encryption: none
+  name: 🇨🇦CA_210|843KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 188.114.97.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    early-data-header-name: Sec-WebSocket-Protocol
+    headers:
+      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
         like Gecko) Chrome/57.0.2987.133 Safari/537.36
     max-early-data: 2560
     path: /
   xudp: true
+- encryption: none
+  name: 🇨🇦CA_211|5.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 188.114.97.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+    path: /?ed=2560
+  xudp: true
+- name: 🇨🇦CA_212|5.8MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '8080'
+  server: 188.114.97.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: ne4d3.thir.mn8.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/66.0.3359.117 Safari/537.36
+    path: /?ed=2560
+  xudp: true
+- encryption: none
+  name: 🇨🇦CA_213|4.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 188.114.97.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: zb1zi.s3nx.dyz.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/65.0.3325.181 Safari/537.36
+    path: /?ed=2560
+  xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_301|3.6MB/s|24%|YT-CN|GPT⁺-KR|CL-KR
+  name: 🇨🇦CA_363|5.8MB/s|0%|YT-US|GPT⁺-VN
   network: ws
   port: '2087'
   server: mfa.gov.ua
@@ -1915,14 +2132,14 @@ proxies:
     early-data-header-name: Sec-WebSocket-Protocol
     headers:
       Host: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/42.0.2311.135 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
     max-early-data: 2560
     path: /
   xudp: true
 - client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_303|2.5MB/s|24%|YT-CN|GPT⁺-KR|CL-KR
+  name: 🇨🇦CA_373|1.2MB/s|24%|YT-US|GPT⁺
   network: ws
   port: '2087'
   server: www.shopify.com
@@ -1935,215 +2152,15 @@ proxies:
     early-data-header-name: Sec-WebSocket-Protocol
     headers:
       Host: fx3h2kf8xn.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/35.0.1916.153 Safari/537.36
+      User-Agent: Mozilla/5.0 (X11; U; Linux i586; en-US) AppleWebKit/533.2 (KHTML,
+        like Gecko) Chrome/5.0.342.1 Safari/533.2
     max-early-data: 2560
     path: /
   xudp: true
-- alpn:
-  - http/1.1
-  client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_304|3.0MB/s|24%|YT-CN|GPT⁺-US|CL-US
-  network: ws
-  port: '443'
-  server: www.speedtest.net
-  servername: ez-3e9698.ezaccess1ec1f0c.workers.dev
-  tls: true
-  type: vless
-  udp: true
-  uuid: fae09ec8-642b-4750-a019-27a97cd967fd
-  ws-opts:
-    early-data-header-name: Sec-WebSocket-Protocol
-    headers:
-      Host: ez-3e9698.ezaccess1ec1f0c.workers.dev
-      User-Agent: Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/65.0.3325.181 Safari/537.36
-    max-early-data: 2560
-    path: /eyJqdW5rIjoib0FkbVU0Vm5ITkQiLCJwcm90b2NvbCI6InZsIiwibW9kZSI6InByb3h5aXAiLCJwYW5lbElQcyI6W119
-  xudp: true
-- name: 🇨🇦CA_305|4.5MB/s|24%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '2086'
-  server: 172.64.229.2
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/55.0.2883.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_309|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 104.18.34.14
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/62.0.3202.94 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_310|783KB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 104.18.39.218
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/47.0.2526.111 Safari/537.36 MVisionPlayer/1.0.0.0
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_311|4.2MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 104.18.46.234
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/51.0.2704.103 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_312|838KB/s|24%|YT-US|GPT⁺-US|CL-US
-  network: ws
-  port: '2086'
-  server: 104.18.46.234
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/56.0.2924.87 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_313|2.9MB/s|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 104.18.46.234
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/55.0.2883.87 Safari/537.36
-    path: ''
-  xudp: true
-- name: 🇨🇦CA_314|3.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 104.18.46.234
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/53.0.2785.143 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_315|3.5MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 104.18.46.46
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.102 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_316|4.1MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 104.18.46.46
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/50.0.2661.94 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_317|1.0MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 104.18.46.46
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/533.4
-        (KHTML, like Gecko) Chrome/5.0.375.99 Safari/533.4
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_318|4.8MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_374|4.7MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2082'
-  server: 104.18.47.113
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/70.0.3538.110 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_319|3.3MB/s|24%|YT-CN|GPT-US|CL-US
-  network: ws
-  port: '2086'
-  server: 104.18.47.113
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/62.0.3202.89 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_320|822KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2095'
-  server: 104.18.47.113
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/63.0.3239.132 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_321|3.6MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 104.18.47.113
+  server: 162.159.0.53
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2155,38 +2172,11 @@ proxies:
         Mobile Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_322|4.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_375|4.6MB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '80'
-  server: 104.18.47.113
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/66.0.3359.117 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_323|2.7MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 104.18.47.113
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/533.2 (KHTML,
-        like Gecko) Chrome/5.0.342.1 Safari/533.2
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_324|4.4MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 162.159.0.169
+  port: '8080'
+  server: 104.18.34.14
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2194,151 +2184,41 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.113 Safari/537.36
+        like Gecko) Chrome/58.0.3029.110 Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_325|3.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+  xudp: true
+- name: 🇨🇦CA_383|5.6MB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '2095'
-  server: 162.159.0.169
+  port: '2082'
+  server: 104.18.34.14
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
         Gecko) Chrome/41.0.2272.76 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_326|4.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_384|876KB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '8080'
-  server: 162.159.0.169
+  port: '2095'
+  server: 104.18.39.218
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/69.0.3497.100 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/49.0.2623.110 Safari/537.36
     path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_327|865KB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 162.159.0.53
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/66.0.3359.139 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_328|731KB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 162.159.0.53
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/70.0.3538.77 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_329|4.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_385|1.4MB/s|24%|YT-US|GPT
   network: ws
   port: '2052'
-  server: 162.159.24.131
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G610F Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_330|3.7MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 162.159.24.131
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; vivo 1603 Build/MMB29M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/58.0.3029.83 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_336|4.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 162.159.43.187
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/65.0.3325.181 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_337|3.4MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 162.159.48.32
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/57.0.2987.133 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_338|4.0MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.154.8
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/52.0.2743.116 Safari/537.36
-    path: ''
-  xudp: true
-- name: 🇨🇦CA_339|4.4MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
-  server: 172.64.154.8
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/64.0.3282.186 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_340|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 172.64.154.8
+  server: 104.18.46.234
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2346,108 +2226,12 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.90 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_341|1.6MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.158.146
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
         like Gecko) Chrome/62.0.3202.89 Safari/537.36
     path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_342|4.3MB/s|24%|YT-CN|GPT-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.158.146
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/61.0.3163.79 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_343|5.0MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '80'
-  server: 172.64.158.146
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/57.0.2987.133 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_344|4.5MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8880'
-  server: 172.64.158.146
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/69.0.3497.100 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_345|2.6MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.229.170
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.90 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_346|706KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.229.170
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G570M Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_347|3.3MB/s|24%|YT-US|GPT⁺-US|CL-US
+- name: 🇨🇦CA_386|6.1MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2086'
-  server: 172.64.229.170
-  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/62.0.3202.94 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_348|4.4MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '8080'
-  server: 172.64.229.170
+  server: 104.18.46.234
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2455,12 +2239,27 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/51.0.2704.103 Safari/537.36
+        Gecko) Chrome/55.0.2883.87 Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_349|5.1MB/s|24%|YT-US|GPT⁺-US|CL-US
+  xudp: true
+- name: 🇨🇦CA_387|5.8MB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '80'
-  server: 172.64.229.170
+  port: '2082'
+  server: 104.18.46.46
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 7.1.2; Redmi 4X Build/N2G47H) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_388|6.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 104.18.46.46
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2471,7 +2270,364 @@ proxies:
         like Gecko) Chrome/52.0.2743.116 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_350|3.9MB/s|0%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_389|4.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 104.18.46.46
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/41.0.2272.101 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_390|4.9MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2052'
+  server: 104.18.47.113
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/35.0.1916.153 Safari/537.36
+    path: ''
+  xudp: true
+- name: 🇨🇦CA_391|3.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 104.18.47.113
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/533.2 (KHTML,
+        like Gecko) Chrome/5.0.342.1 Safari/533.2
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_392|4.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 104.18.47.113
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/67.0.3396.99 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_393|4.2MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '80'
+  server: 104.18.47.113
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/47.0.2526.106 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_395|6.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 162.159.0.169
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_396|4.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.0.169
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; vivo 1603 Build/MMB29M) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/58.0.3029.83 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_397|6.7MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2095'
+  server: 162.159.0.169
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/69.0.3497.100 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_398|6.2MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2086'
+  server: 162.159.0.53
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.0) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/49.0.2623.112 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_399|5.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 162.159.0.53
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.30 (KHTML, like Gecko)
+        Chrome/12.0.742.100 Safari/534.30
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_400|3.4MB/s|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 162.159.24.131
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.113 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- encryption: none
+  name: 🇨🇦CA_401|832KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.24.131
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/67.0.3396.99 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_402|859KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 162.159.24.131
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/65.0.3325.181 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_403|6.5MB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '8880'
+  server: 162.159.24.131
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/48.0.2564.116 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_411|6.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.43.187
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0; MYA-L22 Build/HUAWEIMYA-L22) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_414|5.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.154.8
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/41.0.2272.101 Safari/537.36
+    path: ''
+  xudp: true
+- name: 🇨🇦CA_415|5.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.154.8
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/61.0.3163.100 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_416|4.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.154.8
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10
+        (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_417|6.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.158.146
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/68.0.3440.106 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_418|5.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.158.146
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/54.0.2840.99 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_419|5.2MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '80'
+  server: 172.64.158.146
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.67 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_420|6.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.158.146
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_421|4.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.229.170
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/49.0.2623.112 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_422|5.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.229.170
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; WAS-LX3 Build/HUAWEIWAS-LX3)
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_423|912KB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '8080'
+  server: 172.64.229.170
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/67.0.3396.87 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_424|2.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 172.64.229.170
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like
+        Gecko) Chrome/26.0.1410.64 Safari/537.31
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_425|3.8MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '8880'
   server: 172.64.229.170
@@ -2481,10 +2637,10 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/43.0.2357.65 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.113 Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_351|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_426|5.6MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2052'
   server: 172.64.229.2
@@ -2494,10 +2650,10 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/40.0.2214.115 Safari/537.36
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0; MYA-L22 Build/HUAWEIMYA-L22) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_352|4.6MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_427|2.7MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2082'
   server: 172.64.229.2
@@ -2507,40 +2663,27 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.0; SM-G570M Build/NRD90M) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10
+        (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_353|3.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2052'
-  server: 172.64.32.103
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/65.0.3325.181 Safari/537.36
-    path: /?ed=2560security=tls
-  xudp: true
-- name: 🇨🇦CA_354|938KB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2082'
-  server: 172.64.32.103
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like
-        Gecko) Chrome/11.0.696.3 Safari/534.24
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_355|876KB/s|YT-US|GPT⁺-US|CL-US
+- name: 🇨🇦CA_428|6.1MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2086'
+  server: 172.64.229.2
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/63.0.3239.132 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_429|5.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
   server: 172.64.32.103
   type: vless
   udp: true
@@ -2549,10 +2692,24 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/56.0.2924.87 Safari/537.36
+        like Gecko) Chrome/64.0.3282.186 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_356|897KB/s|0%|YT-US|GPT⁺-US|CL-US
+- name: 🇨🇦CA_430|5.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.32.103
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.0; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/51.0.2704.106 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_431|6.1MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2095'
   server: 172.64.32.103
@@ -2562,11 +2719,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/63.0.3239.84 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.110 Safari/537.36
     path: /?ed=2560security=tls
 - encryption: none
-  name: 🇨🇦CA_357|4.5MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+  name: 🇨🇦CA_432|5.9MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2082'
   server: 172.64.32.108
@@ -2576,11 +2733,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Unknown; Linux) AppleWebKit/538.1 (KHTML, like Gecko)
-        Chrome/v1.0.0 Safari/538.1
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/54.0.2840.71 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_358|4.5MB/s|24%|YT-CN|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_433|1.0MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2086'
   server: 172.64.32.108
@@ -2590,10 +2747,24 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 7.1; vivo 1716 Build/N2G47H) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/61.0.3163.98 Mobile Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.90 Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_359|4.5MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_434|5.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 172.64.32.108
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; de-DE) AppleWebKit/534.17
+        (KHTML, like Gecko) Chrome/10.0.649.0 Safari/534.17
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_435|4.4MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '80'
   server: 172.64.32.108
@@ -2603,11 +2774,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/53.0.2785.143 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_360|3.0MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_436|851KB/s|24%|YT-US|GPT-US
   network: ws
   port: '2095'
   server: 172.64.42.85
@@ -2617,11 +2788,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/49.0.2623.112 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_361|3.3MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_437|6.2MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '8080'
   server: 172.64.42.85
@@ -2631,11 +2802,11 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/37.0.2062.120 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_362|4.4MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- name: 🇨🇦CA_438|5.5MB/s|0%|YT-US|GPT⁺-US
   network: ws
   port: '80'
   server: 172.64.42.85
@@ -2645,13 +2816,372 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.67 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_363|962KB/s|24%|YT-US|GPT⁺|CL-US|GM-US
+- name: 🇨🇦CA_439|2.5MB/s|24%|YT-US
   network: ws
   port: '2052'
+  server: 172.64.52.6
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/56.0.2924.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_440|4.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 172.64.52.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.113 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_441|2.3MB/s|YT-US|GPT-US
+  network: ws
+  port: '8880'
+  server: 172.64.52.6
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_442|4.6MB/s|YT-CN|GPT-US
+  network: ws
+  port: '2086'
+  server: 172.64.53.55
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/40.0.2214.111 Safari/537.36
+    path: /?ed=2560security=tls
+- alpn:
+  - http/1.1
+  client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_444|2.7MB/s|0%|YT-US|GPT⁺-DE
+  network: ws
+  port: '443'
+  server: www.speedtest.net
+  servername: CfOI-2FX16g3-8rY2kdXmCJ.WJeSv2ILA3rXbUhpC2NSugRAchGaWK.WOrkeRs.DEV
+  tls: true
+  type: vless
+  udp: true
+  uuid: 513beae3-56e7-4954-a17e-930e06237b27
+  ws-opts:
+    headers:
+      Host: cfoi-2fx16g3-8ry2kdxmcj.wjesv2ila3rxbuhpc2nsugrachgawk.workers.dev
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; Redmi 4A Build/MMB29M; wv) AppleWebKit/537.36
+        (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.116 Mobile Safari/537.36
+    path: /vl/3wSAeuGJbrGHwJ45DA6ircvHC6?ed=2560
+  xudp: true
+- client-fingerprint: chrome
+  name: 🇨🇦CA_445|4.4MB/s|YT-US
+  network: ws
+  port: '443'
+  server: 104.16.151.21
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/45.0.2454.85 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_446|843KB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 104.18.42.54
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/46.0.2490.86 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_447|5.1MB/s|YT-US
+  network: ws
+  port: '2087'
+  server: 172.64.145.93
+  servername: fx3h2kf8xn.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: fx3h2kf8xn.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0; vivo 1713 Build/MRA58K) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_448|3.8MB/s|YT-CN
+  network: ws
+  port: '2053'
+  server: 172.64.52.97
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532M Build/MMB29T) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  name: 🇨🇦CA_449|4.1MB/s|YT-CN
+  network: ws
+  port: '443'
+  server: 172.64.53.194
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/60.0.3112.101 Safari/537.36
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_450|865KB/s|YT-CN
+  network: ws
+  port: '2096'
+  server: 172.64.53.74
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/67.0.3396.87 Safari/537.36
+    path: /
+  xudp: true
+- encryption: none
+  name: 🇨🇦CA_452|4.0MB/s|24%|YT-US|GPT⁺-SG
+  network: ws
+  port: '2082'
+  server: 172.64.150.28
+  servername: hhlfy.twiladaphne.ndjp.net
+  type: vless
+  udp: true
+  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
+  ws-opts:
+    headers:
+      Host: hhlfy.twiladaphne.ndjp.net
+      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
+    path: /fp
+  xudp: true
+- name: 🇨🇦CA_453|6.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 104.18.47.113
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/41.0.2272.118 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_454|5.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 104.18.34.14
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/56.0.2924.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_455|5.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 104.18.46.234
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 7.0; TRT-LX3 Build/HUAWEITRT-LX3) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_456|1.2MB/s|24%|YT-US|GPT
+  network: ws
+  port: '8080'
+  server: 104.21.70.21
+  type: vless
+  udp: true
+  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
+  ws-opts:
+    headers:
+      Host: hhlfy.twiladaphne.ndjp.net
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/68.0.3440.106 Safari/537.36
+    path: /
+  xudp: true
+- name: 🇨🇦CA_457|2.9MB/s|24%|YT-CN|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.52.6
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.110 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_458|5.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 104.18.46.234
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/49.0.2623.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_459|5.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 172.64.154.8
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/69.0.3497.100 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_460|6.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 104.18.47.113
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/62.0.3202.89 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_461|5.6MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 104.18.46.46
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_462|4.4MB/s|YT-US|GPT-SG
+  network: ws
+  port: '8080'
+  server: 188.114.97.6
+  type: vless
+  udp: true
+  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
+  ws-opts:
+    headers:
+      Host: hhlfy.twiladaphne.ndjp.net
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
+    path: /
+  xudp: true
+- name: 🇨🇦CA_463|7.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 162.159.0.169
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_464|4.4MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '80'
   server: 172.64.52.6
   servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
@@ -2664,10 +3194,173 @@ proxies:
         like Gecko) Chrome/57.0.2987.133 Safari/537.36
     path: /?ed=2560security=tls
   xudp: true
-- name: 🇨🇦CA_364|4.8MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+- client-fingerprint: chrome
+  name: 🇨🇦CA_465|4.4MB/s|YT-US
+  network: ws
+  password: 87d1bfd4-574e-4c96-ad42-0426f27461ff
+  port: '443'
+  server: 172.64.152.241
+  skip-cert-verify: false
+  sni: _acme-challenge.sb.cloudns.biz
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
+    path: ''
+- client-fingerprint: unsafe
+  encryption: none
+  name: 🇨🇦CA_467|999KB/s|YT-US|GPT⁺-KR
+  network: ws
+  port: '443'
+  server: 188.114.97.6
+  servername: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/53.0.2785.143 Safari/537.36
+    path: /?ed=2560
+  xudp: true
+- name: 🇨🇦CA_468|4.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 162.159.48.32
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- client-fingerprint: unsafe
+  name: 🇨🇦CA_469|4.3MB/s|24%|YT-US|GPT⁺-KR
+  network: ws
+  port: '443'
+  server: 188.114.97.6
+  servername: fx3h2kf8xn.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    headers:
+      Host: fx3h2kf8xn.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/47.0.2526.111 Safari/537.36
+    path: /?ed=2560
+  xudp: true
+- name: 🇨🇦CA_470|4.5MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2095'
+  server: 162.159.48.32
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/49.0.2623.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_471|5.6MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '80'
+  server: 162.159.48.32
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/62.0.3202.89 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_472|1.4MB/s|YT-US|GPT⁺-US
   network: ws
   port: '2082'
-  server: 172.64.52.6
+  server: 172.64.154.8
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/70.0.3538.67 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_473|3.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 162.159.24.131
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/66.0.3359.181 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_474|5.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.229.170
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/61.0.3163.100 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_475|6.1MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '8880'
+  server: 104.18.34.14
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; WAS-LX3 Build/HUAWEIWAS-LX3)
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_476|5.0MB/s|24%|YT-US|GPT⁺
+  network: ws
+  port: '8080'
+  server: 172.64.158.146
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/64.0.3282.167 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_477|4.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 172.64.42.85
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2675,12 +3368,117 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
-        Chrome/41.0.2228.0 Safari/537.36
+        Chrome/39.0.2171.95 Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_365|4.5MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+  xudp: true
+- name: 🇨🇦CA_478|2.6MB/s|24%|YT-US|GPT⁺
+  network: ws
+  port: '2086'
+  server: 104.18.39.218
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/66.0.3359.181 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_479|4.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 104.18.39.218
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/54.0.2840.99 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_480|4.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 162.159.0.169
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/54.0.2840.71 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_481|7.1MB/s|YT-US|GPT-US
+  network: ws
+  port: '8080'
+  server: 162.159.24.131
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; WAS-LX3 Build/HUAWEIWAS-LX3)
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_482|6.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 162.159.43.187
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_483|3.9MB/s|24%|YT-US|GPT⁺-US
   network: ws
   port: '2095'
-  server: 172.64.52.6
+  server: 104.18.39.218
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/56.0.2924.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_484|4.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.229.2
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Unknown; Linux) AppleWebKit/538.1 (KHTML, like Gecko)
+        Chrome/v1.0.0 Safari/538.1
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_485|3.7MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 172.64.42.85
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2690,10 +3488,11 @@ proxies:
       User-Agent: Mozilla/5.0 (Linux; Android 6.0; vivo 1610 Build/MMB29M) AppleWebKit/537.36
         (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_366|3.4MB/s|24%|YT-US|GPT⁺-US|CL-US
+- name: 🇨🇦CA_486|6.3MB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '80'
-  server: 172.64.52.6
+  port: '2086'
+  server: 104.18.46.46
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
   type: vless
   udp: true
   uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
@@ -2701,24 +3500,12 @@ proxies:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
       User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/47.0.2526.106 Safari/537.36
+        Gecko) Chrome/49.0.2623.110 Safari/537.36
     path: /?ed=2560security=tls
-- name: 🇨🇦CA_367|842KB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
+  xudp: true
+- name: 🇨🇦CA_487|4.4MB/s|24%|YT-US|GPT⁺-US
   network: ws
-  port: '8880'
-  server: 172.64.52.6
-  type: vless
-  udp: true
-  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
-  ws-opts:
-    headers:
-      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/58.0.3029.110 Safari/537.36
-    path: /?ed=2560security=tls
-- name: 🇨🇦CA_368|2.4MB/s|24%|YT-US|GPT⁺-US|CL-US|GM-US
-  network: ws
-  port: '2086'
+  port: '2095'
   server: 172.64.53.55
   type: vless
   udp: true
@@ -2726,14 +3513,337 @@ proxies:
   ws-opts:
     headers:
       Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
-      User-Agent: Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/60.0.3112.90 Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/49.0.2623.112 Safari/537.36
     path: /?ed=2560security=tls
-- client-fingerprint: chrome
-  name: 🇨🇦CA_370|3.5MB/s|YT-CN
+- name: 🇨🇦CA_488|3.3MB/s|24%|YT-CN|GPT-US
+  network: ws
+  port: '2095'
+  server: 172.64.52.6
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/55.0.2883.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_489|858KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.42.85
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/56.0.2924.87 Safari/537.36
+    path: ''
+  xudp: true
+- name: 🇨🇦CA_490|4.8MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8080'
+  server: 162.159.43.187
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/50.0.2661.94 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_491|805KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2082'
+  server: 104.18.46.234
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 7.0; TRT-LX3 Build/HUAWEITRT-LX3) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_492|4.2MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2052'
+  server: 172.64.53.55
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0; CAM-L21 Build/HUAWEICAM-L21; wv)
+        AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile
+        Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_493|6.6MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2095'
+  server: 172.64.154.8
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_494|5.7MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2095'
+  server: 172.64.158.146
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/50.0.2661.102 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_495|6.3MB/s|24%|YT-US|GPT⁺-FR
+  network: ws
+  port: '2086'
+  server: 104.18.34.14
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0; MYA-L22 Build/HUAWEIMYA-L22) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_496|6.8MB/s|YT-US|GPT-US
+  network: ws
+  port: '2052'
+  server: 104.18.39.218
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/63.0.3239.132 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_497|4.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2052'
+  server: 162.159.48.32
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10
+        (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_498|834KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.32.103
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/43.0.2357.65 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_499|6.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.32.103
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_500|4.6MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2052'
+  server: 162.159.0.53
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/41.0.2228.0 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_501|6.3MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 172.64.32.108
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/39.0.2171.95 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_502|887KB/s|0%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 162.159.0.53
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/51.0.2704.103 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_503|5.0MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 172.64.53.55
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.17
+        (KHTML, like Gecko) Chrome/10.0.649.0 Safari/534.17
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_504|5.0MB/s|YT-US|GPT-US
+  network: ws
+  port: '80'
+  server: 162.159.0.53
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/65.0.3325.181 Safari/537.36
+    path: /?ed=2560security=tls
+- name: 🇨🇦CA_505|4.5MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 172.64.53.55
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/45.0.2454.93 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_506|5.6MB/s|YT-US|GPT⁺-US
+  network: ws
+  port: '2086'
+  server: 162.159.48.32
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/51.0.2704.106 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- alterId: 0
+  cipher: auto
+  name: 🇨🇦CA_2|1.1MB/s|58%|YT-US|GPT⁺-CA
+  network: tcp
+  port: '18000'
+  server: 134.195.196.211
+  servername: '@proxyvpn11'
+  skip-cert-verify: false
+  tls: false
+  type: vmess
+  udp: true
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  xudp: true
+- alpn:
+  - http/1.1
+  client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_507|2.1MB/s|24%|YT-US|GPT⁺-DE
   network: ws
   port: '443'
-  server: 104.19.214.97
+  server: 188.114.97.8
+  servername: cFOi-2fX16G3-8ry2KDxMcJ.wjESV2IlA3rXBuhpC2NsUgrAChGAWk.wOrKerS.DEv
+  tls: true
+  type: vless
+  udp: true
+  uuid: 513beae3-56e7-4954-a17e-930e06237b27
+  ws-opts:
+    headers:
+      Host: cfoi-2fx16g3-8ry2kdxmcj.wjesv2ila3rxbuhpc2nsugrachgawk.workers.dev
+      User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like
+        Gecko) Chrome/11.0.696.3 Safari/534.24
+    path: /vl/FuJlzLUhMmosE6ySAHYtJDUq6XlF?ed=2560
+  xudp: true
+- client-fingerprint: chrome
+  encryption: none
+  name: 🇨🇦CA_650|4.8MB/s|24%|YT-US
+  network: ws
+  port: '2087'
+  server: 104.18.38.47
+  servername: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
+  tls: true
+  type: vless
+  udp: true
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
+  ws-opts:
+    early-data-header-name: Sec-WebSocket-Protocol
+    headers:
+      Host: fx3l5i2wdfxln0.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/41.0.2272.104 Safari/537.36
+    max-early-data: 2560
+    path: /
+  xudp: true
+- client-fingerprint: chrome
+  name: 🇨🇦CA_658|5.1MB/s|YT-US
+  network: ws
+  port: '443'
+  server: 104.18.42.54
   servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
@@ -2742,45 +3852,145 @@ proxies:
   ws-opts:
     headers:
       Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Linux; Android 7.1.2; Redmi 4X Build/N2G47H) AppleWebKit/537.36
-        (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36
+      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/41.0.2272.101 Safari/537.36
     path: /
   xudp: true
-- client-fingerprint: chrome
-  encryption: none
-  name: 🇨🇦CA_371|3.1MB/s|YT-CN
+- name: 🇨🇦CA_659|2.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 104.18.39.218
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/65.0.3325.162 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_661|879KB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 172.64.229.2
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/63.0.3239.84 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_662|6.1MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '8880'
+  server: 104.18.47.113
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/56.0.2924.87 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_663|6.5MB/s|24%|YT-US|GPT-US
+  network: ws
+  port: '2095'
+  server: 104.18.34.14
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/66.0.3359.139 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_664|5.4MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 104.18.46.234
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/57.0.2987.133 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- client-fingerprint: qq
+  name: 🇨🇦CA_665|2.5MB/s|YT-US
   network: ws
   port: '2087'
-  server: 172.64.145.93
-  servername: fx3h2kf8xn.fx6hsv0.ccwu.cc
+  server: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
   udp: true
   uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
   ws-opts:
     headers:
-      Host: fx3h2kf8xn.fx6hsv0.ccwu.cc
-      User-Agent: Mozilla/5.0 (Windows NT 6.0; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/51.0.2704.106 Safari/537.36
+      Host: ''
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/66.0.3359.181 Safari/537.36
     path: /
   xudp: true
-- alpn:
-  - http/1.1
-  client-fingerprint: chrome
+- name: 🇨🇦CA_667|4.9MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '80'
+  server: 162.159.0.169
+  servername: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
+        Gecko) Chrome/40.0.2214.111 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- name: 🇨🇦CA_668|6.2MB/s|24%|YT-US|GPT⁺-US
+  network: ws
+  port: '2095'
+  server: 162.159.0.53
+  type: vless
+  udp: true
+  uuid: 47fcef29-ab4e-4aa6-932b-d95a18f28a4e
+  ws-opts:
+    headers:
+      Host: 8nj2r.2k8t.f88.hh.vavava.kdns.fr
+      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/64.0.3282.186 Safari/537.36
+    path: /?ed=2560security=tls
+  xudp: true
+- client-fingerprint: chrome
   encryption: none
-  name: 🇨🇦CA_373|738KB/s|24%|YT-US|GPT⁺-DE|CL-DE|GM-US
+  name: 🇨🇦CA_844|5.0MB/s|YT-US
   network: ws
   port: '443'
-  server: 172.67.187.121
-  servername: jtv3y5hswdq0iiykejteoqqecsx.uybhnhbhbj.workers.dev
+  server: 104.19.215.97
+  servername: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
   tls: true
   type: vless
   udp: true
-  uuid: f8546acb-185c-43a9-8065-b901c9f353c9
+  uuid: 77777777-8a3e-6666-b6d1-a9c5f0e8b3a2
   ws-opts:
     headers:
-      Host: jtv3y5hswdq0iiykejteoqqecsx.uybhnhbhbj.workers.dev
-      User-Agent: Mozilla/5.0 (Windows NT 5.1; WOW64) AppleWebKit/537.36 (KHTML, like
-        Gecko) Chrome/46.0.2490.80 Safari/537.36
-    path: /vl/lQvZpD6BDBDFcrhffa1JYDt?ed=2560
+      Host: faxf32gkfzoxqv.fx6hsv0.ccwu.cc
+      User-Agent: Mozilla/5.0 (Linux; Android 6.0.1; SM-G532M Build/MMB29T) AppleWebKit/537.36
+        (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36
+    path: /
   xudp: true
